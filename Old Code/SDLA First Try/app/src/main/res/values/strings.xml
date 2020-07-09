@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="main_intro">Welcome to StudBud. Select an option</string>
+
+    <string name="menu_option_flashcard">FlashCards</string>
+
+    <string name="fcmenu_newCollection">Create a new collection</string>
+    <string name="fcmenu_newCollectionDescription">An icon to represent adding a new card to a stack</string>
+    <string name="fcmenu_chooseCollection">View an existing collection</string>
+
+    <string name="new_collection_header">Choose a title for your new collection and click the button to create it!</string>
+    <string name="new_collection_title">Enter a title</string>
+    <string name="new_collection_button_description">An icon or image representative of a new collection</string>
+</resources>
