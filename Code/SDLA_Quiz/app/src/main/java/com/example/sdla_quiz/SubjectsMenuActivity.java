@@ -11,6 +11,7 @@ public class SubjectsMenuActivity extends AppCompatActivity {
 
     //Declare Buttons
     Button newSubjectBtn;
+    Button delSubjectBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +20,21 @@ public class SubjectsMenuActivity extends AppCompatActivity {
 
         //Initialise Buttons
         newSubjectBtn = findViewById(R.id.btn_subjectsMenu_newSubject);
+        delSubjectBtn = findViewById(R.id.btn_subjectsMenu_deleteSubject);
 
 
         newSubjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SubjectsMenuActivity.this, SubjectsNewSubjectActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        delSubjectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SubjectsMenuActivity.this, SubjectsDeleteSubjectActivity.class);
                 startActivity(intent);
             }
         });

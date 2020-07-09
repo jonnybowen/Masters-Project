@@ -106,6 +106,11 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.insert(SubjectsTable.TABLE_NAME, null, cv);
     }
 
+    public void deleteSubject(String string){
+        db = getWritableDatabase();
+        db.delete(SubjectsTable.TABLE_NAME, SubjectsTable.COLUMN_SUBJECT_NAME + "=?", new String[]{string});
+    }
+
     private void fillQuestionsTable() {
         Question q1 = new Question("PROGRAMMING SUBJECT, EASY TEST Q: A is correct",
                 "A", "B", "C", 1, Question.difficultyEasy, Subject.PROGRAMMING);

@@ -171,8 +171,12 @@ public class QuizActivity extends AppCompatActivity {
             timeLeftMillis = COUNTDOWN_MILLIS;
             startCountDown();
         } else { // Negative Path - No questions are left
-            Toast.makeText(this, "No questions meet those parameters.", Toast.LENGTH_LONG).show();
-            finishQuiz();
+            if (questionList.size() == 0) {
+                Toast.makeText(this, "No questions meet those parameters.", Toast.LENGTH_LONG).show();
+                finishQuiz();
+            } else {
+                finishQuiz();
+            }
         }
     }
 
