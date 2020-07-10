@@ -25,6 +25,13 @@ public final class QuizContract {
         public static final String COLUMN_SUBJECT_NAME = "subjectName";
     }
 
+    public static class FlashcardsTable implements BaseColumns {
+        public static final String TABLE_NAME = "Flashcards";
+        public static final String COLUMN_TERM = "term";
+        public static final String COLUMN_DEFINITION = "definition";
+        public static final String COLUMN_SUBJECT_ID = "subjectId";
+    }
+
 
 
 }

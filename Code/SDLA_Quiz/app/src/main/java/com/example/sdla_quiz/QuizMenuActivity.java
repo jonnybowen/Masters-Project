@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 public class QuizMenuActivity extends AppCompatActivity {
@@ -42,7 +41,7 @@ public class QuizMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz_menu);
 
         //Declare and Initialise TextViews
-        spin_subject = (Spinner) findViewById(R.id.spinner_quiz_menu_subject);
+        spin_subject = (Spinner) findViewById(R.id.spinner_flashcardMenu_subject);
         spin_difficulty = (Spinner) findViewById(R.id.spinner_quiz_menu_difficulty);
         tv_HighScore = findViewById(R.id.tv_quiz_highScore);
 

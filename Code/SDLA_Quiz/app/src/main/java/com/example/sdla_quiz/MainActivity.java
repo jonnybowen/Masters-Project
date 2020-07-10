@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     //Declare Buttons
     Button quizButton;
     Button subjectsButton;
+    Button flashcardsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         //Initialise Buttons
         quizButton = (Button) findViewById(R.id.btn_menu_quiz);
         subjectsButton = (Button) findViewById(R.id.btn_menu_Subjects);
+        flashcardsButton = (Button) findViewById(R.id.btn_menu_flashcards);
 
 
         /**
@@ -42,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SubjectsMenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        flashcardsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FlashcardMenuActivity.class);
                 startActivity(intent);
             }
         });

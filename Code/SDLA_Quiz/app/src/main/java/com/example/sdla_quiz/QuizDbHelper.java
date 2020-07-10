@@ -19,7 +19,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
     //Initialise and declare variables
     public static final String DATABASE_NAME = "StudyQuiz.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     //Initialise Database
     private SQLiteDatabase db;
@@ -59,10 +59,24 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 SubjectsTable.TABLE_NAME + "(" + SubjectsTable._ID + ")" + "ON DELETE CASCADE" +
                 ")";
 
+        final String SQL_CREATE_FLASHCARDS_TABLE = "CREATE TABLE " +
+                FlashcardsTable.TABLE_NAME + " (" +
+                FlashcardsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                FlashcardsTable.COLUMN_TERM + " TEXT, " +
+                FlashcardsTable.COLUMN_DEFINITION + " TEXT, " +
+                FlashcardsTable.COLUMN_SUBJECT_ID + " INTEGER, " +
+                "FOREIGN KEY(" + FlashcardsTable.COLUMN_SUBJECT_ID + ") REFERENCES " +
+                SubjectsTable.TABLE_NAME + "(" + SubjectsTable._ID + ")" + "ON DELETE CASCADE" +
+                ")";
+
+
         db.execSQL(SQL_CREATE_SUBJECTS_TABLE);
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
+        db.execSQL(SQL_CREATE_FLASHCARDS_TABLE);
+
         fillSubjectsTable();
         fillQuestionsTable();
+        fillFlashcardsTable();
 
     }
 
@@ -70,6 +84,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + SubjectsTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionsTable.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + FlashcardsTable.TABLE_NAME);
         onCreate(db);
     }
 
@@ -227,4 +242,77 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         cursor.close();
         return questionList;
     }
+
+
+    private void insertFlashcard(Flashcard flashcard){
+        ContentValues cv = new ContentValues();
+        cv.put(FlashcardsTable.COLUMN_DEFINITION, flashcard.getDefinition());
+        cv.put(FlashcardsTable.COLUMN_TERM, flashcard.getTerm());
+        cv.put(FlashcardsTable.COLUMN_SUBJECT_ID, flashcard.getSubjectId());
+        db.insert(FlashcardsTable.TABLE_NAME, null, cv);
+    }
+
+    public void addFlashcard(Flashcard flashcard){
+        db = getWritableDatabase();
+        insertFlashcard(flashcard);
+    }
+
+    public List<Flashcard> getAllFlashcards(){
+        List<Flashcard> flashcardList = new ArrayList<>();
+        db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + FlashcardsTable.TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Flashcard flashcard = new Flashcard();
+                flashcard.setId(cursor.getInt(cursor.getColumnIndex(FlashcardsTable._ID)));
+                flashcard.setTerm(cursor.getString(cursor.getColumnIndex(FlashcardsTable.COLUMN_TERM)));
+                flashcard.setDefinition(cursor.getString(cursor.getColumnIndex(FlashcardsTable.COLUMN_DEFINITION)));
+                flashcard.setSubjectId(cursor.getInt(cursor.getColumnIndex(FlashcardsTable.COLUMN_SUBJECT_ID)));
+                flashcardList.add(flashcard);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return flashcardList;
+    }
+
+    public List<Flashcard> getFlashcards(int subjectId){
+        List<Flashcard> flashcardList = new ArrayList<>();
+        db = getReadableDatabase();
+
+        String selection = FlashcardsTable.COLUMN_SUBJECT_ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(subjectId)};
+
+        Cursor cursor = db.query(FlashcardsTable.TABLE_NAME, null,
+                selection, selectionArgs,
+                null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Flashcard flashcard = new Flashcard();
+                flashcard.setId(cursor.getInt(cursor.getColumnIndex(FlashcardsTable._ID)));
+                flashcard.setTerm(cursor.getString(cursor.getColumnIndex(FlashcardsTable.COLUMN_TERM)));
+                flashcard.setDefinition(cursor.getString(cursor.getColumnIndex(FlashcardsTable.COLUMN_DEFINITION)));
+                flashcard.setSubjectId(cursor.getInt(cursor.getColumnIndex(FlashcardsTable.COLUMN_SUBJECT_ID)));
+                flashcardList.add(flashcard);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return flashcardList;
+    }
+
+
+
+    private void fillFlashcardsTable(){
+        Flashcard f1 = new Flashcard("TEST FLASHCARD 1", "PROGRAMMING", 1);
+        insertFlashcard(f1);
+        Flashcard f2 = new Flashcard("TEST FLASHCARD 2", "GEOGRAPHY", 2);
+        insertFlashcard(f2);
+        Flashcard f3 = new Flashcard("TEST FLASHCARD 3", "MATHS", 3);
+        insertFlashcard(f3);
+        Flashcard f4 = new Flashcard("TEST FLASHCARD 4", "PROGRAMMING", 1);
+        insertFlashcard(f4);
+    }
+
+
 }

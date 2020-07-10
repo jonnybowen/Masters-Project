@@ -70,6 +70,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
                 setNewOption3(et_Option3.getText().toString());
                 setNewAnswerId(Integer.parseInt(et_AnswerId.getText().toString()));
                 setNewDifficulty(difficultySpinner.getSelectedItem().toString());
+
                 Subject selectedSubject = (Subject) subjectSpinner.getSelectedItem(); //temp holder for subject string
                 setNewSubject(selectedSubject.getId()); //convert subject string to int
 

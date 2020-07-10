@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SubjectsDeleteSubjectActivity"></activity>
+        <activity android:name=".FlashcardMenuActivity"></activity>
+        <activity android:name=".FlashcardViewFlashcardActivity" />
+        <activity android:name=".SubjectsDeleteSubjectActivity" />
         <activity android:name=".SubjectsNewSubjectActivity" />
         <activity android:name=".SubjectsMenuActivity" />
         <activity android:name=".QuizCreateQuestionActivity" />
