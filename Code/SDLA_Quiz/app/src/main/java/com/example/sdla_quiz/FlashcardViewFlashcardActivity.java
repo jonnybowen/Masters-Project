@@ -18,6 +18,8 @@ public class FlashcardViewFlashcardActivity extends AppCompatActivity {
 
     //Declare TextViews
     private TextView mainTv;
+    private TextView sideTv;
+    private TextView tv_cardCounter;
 
     //Declare Buttons
     private Button nextBtn;
@@ -42,7 +44,12 @@ public class FlashcardViewFlashcardActivity extends AppCompatActivity {
 
         //Initialise TextViews
         mainTv = findViewById(R.id.tv_viewFlashcards_main);
+
         faceUp = true;
+        sideTv = findViewById(R.id.tv_viewFlashcards_side);
+        sideTv.setText("Side: Term");
+
+        tv_cardCounter = findViewById(R.id.tv_viewFlashcard_counter);
 
         //Initialise Buttons
         nextBtn = findViewById(R.id.btn_viewFlashcards_next);
@@ -72,9 +79,12 @@ public class FlashcardViewFlashcardActivity extends AppCompatActivity {
                 if (faceUp) {
                     mainTv.setText(currentFlashcard.getDefinition());
                     faceUp = false;
+                    sideTv.setText("Side: Definition");
                 } else {
                     mainTv.setText(currentFlashcard.getTerm());
                     faceUp = true;
+                    sideTv.setText("Side: Term");
+
                 }
             }
         });
@@ -94,6 +104,7 @@ public class FlashcardViewFlashcardActivity extends AppCompatActivity {
             //Increment counter and update on-screen counter view.
             //Establish no answer is 'locked-in' and update dynamic button text accordingly.
             flashcardCounter++;
+            tv_cardCounter.setText("Card : " + flashcardCounter + " / " + flashcardCounterTotal );
             faceUp = true;
 
         } else { // Negative Path - No questions are left

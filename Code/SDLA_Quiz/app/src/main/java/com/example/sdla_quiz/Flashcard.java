@@ -5,6 +5,7 @@ public class Flashcard {
     //Declare Variables
     private String term;
     private String definition;
+    private String hint;
     private int subjectId;
     private int id;
 
@@ -48,5 +49,13 @@ public class Flashcard {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 }

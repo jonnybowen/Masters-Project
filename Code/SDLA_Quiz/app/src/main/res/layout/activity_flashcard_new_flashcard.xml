@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FlashcardNewFlashcardActivity">
+
+    <EditText
+        android:id="@+id/et_newFlashcard_term"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="64dp"
+        android:capitalize="sentences"
+        android:ems="10"
+        android:hint="Term"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_newFlashcard" />
+
+    <EditText
+        android:id="@+id/et_newFlashcard_definition"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:capitalize="sentences"
+        android:ems="10"
+        android:hint="Definition"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_newFlashcard_term" />
+
+    <Button
+        android:id="@+id/btn_newFlashcard_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="64dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_newFlashcard_definition" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_newFlashcard_definition" />
+
+    <Spinner
+        android:id="@+id/spinner_newFlashcard"
+        android:layout_width="284dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

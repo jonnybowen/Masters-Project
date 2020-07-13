@@ -17,11 +17,12 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
     private static QuizDbHelper instance;
 
+
     //Initialise and declare variables
     public static final String DATABASE_NAME = "StudyQuiz.db";
     public static final int DATABASE_VERSION = 2;
 
-    //Initialise Database
+    //Declare Database
     private SQLiteDatabase db;
 
     public QuizDbHelper(@Nullable Context context) {
@@ -103,25 +104,25 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         insertSubject(s3);
     }
 
-    public void addSubject(Subject subject){
+    public void addSubject(Subject subject) {
         db = getWritableDatabase();
         insertSubject(subject);
     }
 
-    public void addSubjects(List<Subject> subjects){
+    public void addSubjects(List<Subject> subjects) {
         db = getWritableDatabase();
-        for (Subject subject : subjects){
+        for (Subject subject : subjects) {
             insertSubject(subject);
         }
     }
 
-    private void insertSubject(Subject subject){
+    private void insertSubject(Subject subject) {
         ContentValues cv = new ContentValues();
         cv.put(SubjectsTable.COLUMN_SUBJECT_NAME, subject.getName());
         db.insert(SubjectsTable.TABLE_NAME, null, cv);
     }
 
-    public void deleteSubject(String string){
+    public void deleteSubject(String string) {
         db = getWritableDatabase();
         db.delete(SubjectsTable.TABLE_NAME, SubjectsTable.COLUMN_SUBJECT_NAME + "=?", new String[]{string});
     }
@@ -148,13 +149,13 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addQuestion(Question question){
+    public void addQuestion(Question question) {
         db = getWritableDatabase();
         insertQuestion(question);
     }
 
-    public void addQuestions(List<Question> questions){
-        for (Question question: questions){
+    public void addQuestions(List<Question> questions) {
+        for (Question question : questions) {
             insertQuestion(question);
         }
     }
@@ -173,7 +174,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
 
-    public List<Subject> getAllSubjects(){
+    public List<Subject> getAllSubjects() {
         List<Subject> subjectList = new ArrayList<>();
         db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + SubjectsTable.TABLE_NAME, null);
@@ -217,13 +218,13 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         ArrayList<Question> questionList = new ArrayList<>();
         db = getReadableDatabase();
 
-       String selection = QuestionsTable.COLUMN_SUBJECT_ID + " = ? " +
-               " AND " + QuestionsTable.COLUMN_DIFFICULTY + " = ? ";
-       String[] selectionArgs = new String[]{String.valueOf(subjectId), difficulty};
+        String selection = QuestionsTable.COLUMN_SUBJECT_ID + " = ? " +
+                " AND " + QuestionsTable.COLUMN_DIFFICULTY + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(subjectId), difficulty};
 
-       Cursor cursor = db.query(QuestionsTable.TABLE_NAME, null,
-               selection, selectionArgs,
-               null, null, null);
+        Cursor cursor = db.query(QuestionsTable.TABLE_NAME, null,
+                selection, selectionArgs,
+                null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -244,7 +245,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
 
-    private void insertFlashcard(Flashcard flashcard){
+    private void insertFlashcard(Flashcard flashcard) {
         ContentValues cv = new ContentValues();
         cv.put(FlashcardsTable.COLUMN_DEFINITION, flashcard.getDefinition());
         cv.put(FlashcardsTable.COLUMN_TERM, flashcard.getTerm());
@@ -252,12 +253,12 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.insert(FlashcardsTable.TABLE_NAME, null, cv);
     }
 
-    public void addFlashcard(Flashcard flashcard){
+    public void addFlashcard(Flashcard flashcard) {
         db = getWritableDatabase();
         insertFlashcard(flashcard);
     }
 
-    public List<Flashcard> getAllFlashcards(){
+    public List<Flashcard> getAllFlashcards() {
         List<Flashcard> flashcardList = new ArrayList<>();
         db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + FlashcardsTable.TABLE_NAME, null);
@@ -276,7 +277,35 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         return flashcardList;
     }
 
-    public List<Flashcard> getFlashcards(int subjectId){
+    public Cursor getAllFlashcardsCursor() {
+        return db.query(
+                FlashcardsTable.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+    }
+
+    public Cursor getFlashcardsCursor(int subjectId) {
+        List<Flashcard> flashcardList = new ArrayList<>();
+        db = getReadableDatabase();
+
+        String selection = FlashcardsTable.COLUMN_SUBJECT_ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(subjectId)};
+
+        Cursor cursor = db.query(FlashcardsTable.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        return cursor;
+    }
+
+    public List<Flashcard> getFlashcards(int subjectId) {
         List<Flashcard> flashcardList = new ArrayList<>();
         db = getReadableDatabase();
 
@@ -302,8 +331,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
 
-
-    private void fillFlashcardsTable(){
+    private void fillFlashcardsTable() {
         Flashcard f1 = new Flashcard("TEST FLASHCARD 1", "PROGRAMMING", 1);
         insertFlashcard(f1);
         Flashcard f2 = new Flashcard("TEST FLASHCARD 2", "GEOGRAPHY", 2);
@@ -313,6 +341,4 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         Flashcard f4 = new Flashcard("TEST FLASHCARD 4", "PROGRAMMING", 1);
         insertFlashcard(f4);
     }
-
-
 }

@@ -14,11 +14,13 @@ import java.util.List;
 public class FlashcardMenuActivity extends AppCompatActivity {
 
     public static final String EXTRA_SUBJECT_ID = "extraSubjectId";
+    public static final String EXTRA_SUBJECT_NAME = "extraSubjectName";
 
 
     Spinner subjectSpinner;
     Button createBtn;
     Button viewBtn;
+    Button deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class FlashcardMenuActivity extends AppCompatActivity {
         subjectSpinner = findViewById(R.id.spinner_flashcardMenu_subject);
         createBtn = findViewById(R.id.btn_flashcardMenu_create);
         viewBtn = findViewById(R.id.btn_flashcardMenu_view);
+        deleteBtn = findViewById(R.id.btn_flashcardMenu_delete);
 
         loadSubjects();
 
@@ -37,6 +40,22 @@ public class FlashcardMenuActivity extends AppCompatActivity {
                 beginViewing();
             }
         });
+
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FlashcardMenuActivity.this, FlashcardNewFlashcardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                beginDeleting();
+            }
+        });
+
 
     }
 
@@ -56,5 +75,16 @@ public class FlashcardMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(FlashcardMenuActivity.this, FlashcardViewFlashcardActivity.class);
         intent.putExtra(EXTRA_SUBJECT_ID, subjectId);
         startActivity(intent);
+    }
+
+    private void beginDeleting(){
+        //Retrieve subject from spinner
+        Subject selectedSubject = (Subject) subjectSpinner.getSelectedItem();
+        int subjectId = selectedSubject.getId();
+
+        Intent intent = new Intent(FlashcardMenuActivity.this, FlashcardDeleteFlashcardActivity.class);
+        intent.putExtra(EXTRA_SUBJECT_ID, subjectId);
+        startActivity(intent);
+
     }
 }
