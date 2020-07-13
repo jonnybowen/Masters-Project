@@ -56,11 +56,12 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
         String definition = mCursor.getString(mCursor.getColumnIndex(QuizContract.FlashcardsTable.COLUMN_DEFINITION));
 
         //Trying to get subject name displayed.
-        int subjectId = mCursor.getInt(mCursor.getColumnIndex(QuizContract.FlashcardsTable.COLUMN_SUBJECT_ID));
+        int id = mCursor.getInt(mCursor.getColumnIndex(QuizContract.FlashcardsTable._ID));
 
 
         holder.termText.setText(term);
         holder.definitionText.setText(definition);
+        holder.itemView.setTag(id);
     }
 
     @Override

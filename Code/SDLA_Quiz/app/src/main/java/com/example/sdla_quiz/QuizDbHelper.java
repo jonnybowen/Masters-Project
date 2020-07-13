@@ -20,7 +20,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
     //Initialise and declare variables
     public static final String DATABASE_NAME = "StudyQuiz.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 1;
 
     //Declare Database
     private SQLiteDatabase db;
@@ -340,5 +340,12 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         insertFlashcard(f3);
         Flashcard f4 = new Flashcard("TEST FLASHCARD 4", "PROGRAMMING", 1);
         insertFlashcard(f4);
+        Flashcard f5 = new Flashcard("TEST FLASHCARD 5", "GEOGRAPHY", 2);
+        insertFlashcard(f5);
+        Flashcard f6 = new Flashcard("TEST FLASHCARD 6", "MATHS", 3);
+        insertFlashcard(f6);
+        Flashcard f7 = new Flashcard("TEST FLASHCARD 7", "PROGRAMMING", 1);
+        insertFlashcard(f7);
+
     }
 }
