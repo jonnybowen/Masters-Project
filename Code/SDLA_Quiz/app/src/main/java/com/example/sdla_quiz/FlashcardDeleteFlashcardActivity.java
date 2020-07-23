@@ -7,14 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.widget.Adapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
 
 public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
 
@@ -42,8 +38,8 @@ public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
         int subjectId = intent.getIntExtra(FlashcardMenuActivity.EXTRA_SUBJECT_ID, 0);
 
         //Initialise Views
-        introText = findViewById(R.id.tv_deleteFlashcard_intro);
-        recyclerView = findViewById(R.id.recyclerView);
+        introText = findViewById(R.id.tv_delFlashcards_intro);
+        recyclerView = findViewById(R.id.recyclerView_delFlashcards);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new FlashcardAdapter(this, QuizDbHelper.getInstance(FlashcardDeleteFlashcardActivity.this).getFlashcardsCursor(subjectId));
         recyclerView.setAdapter(mAdapter);
@@ -66,6 +62,5 @@ public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
         mDatabase.delete(QuizContract.FlashcardsTable.TABLE_NAME,
                 QuizContract.FlashcardsTable._ID + "=" + id, null);
         Toast.makeText(FlashcardDeleteFlashcardActivity.this,"Flashcard deleted from collection.", Toast.LENGTH_LONG).show();
-       // mAdapter.swapCursor(QuizDbHelper.getInstance(this).getFlashcardsCursor(id));
     }
 }

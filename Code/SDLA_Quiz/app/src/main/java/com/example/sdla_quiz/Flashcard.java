@@ -7,7 +7,6 @@ public class Flashcard {
     private String definition;
     private String hint;
     private int subjectId;
-    private int id;
 
     public Flashcard(){
 
@@ -43,13 +42,6 @@ public class Flashcard {
         this.subjectId = subjectId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getHint() {
         return hint;

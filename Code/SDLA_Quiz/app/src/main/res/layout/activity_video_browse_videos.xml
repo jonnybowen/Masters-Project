@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FlashcardDeleteFlashcardActivity">
+    tools:context=".VideoBrowseVideosActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_delFlashcards"
+        android:id="@+id/recyclerView_browseVideos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_delFlashcards_intro" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_browseVideos_intro" />
 
     <TextView
-        android:id="@+id/tv_delFlashcards_intro"
+        android:id="@+id/tv_browseVideos_intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Swipe to delete"
+        android:text="A collection of your videos"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

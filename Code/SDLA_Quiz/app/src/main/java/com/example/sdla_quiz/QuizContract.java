@@ -32,6 +32,13 @@ public final class QuizContract {
         public static final String COLUMN_SUBJECT_ID = "subjectId";
     }
 
+    public static class VideosTable implements BaseColumns {
+        public static final String TABLE_NAME = "Videos";
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_URL = "url";
+        public static final String COLUMN_SUBJECT_ID = "subjectId";
+    }
+
 
 
 }

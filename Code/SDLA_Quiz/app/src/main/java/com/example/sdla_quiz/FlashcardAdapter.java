@@ -2,7 +2,6 @@ package com.example.sdla_quiz;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.text.DecimalFormat;
-import java.util.List;
 
 public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.FlashcardViewHolder> {
 
@@ -32,8 +28,8 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
 
         public FlashcardViewHolder(@NonNull View itemView) {
             super(itemView);
-            termText = itemView.findViewById(R.id.textView_delFlashcard_Term);
-            definitionText = itemView.findViewById(R.id.textView_delFlashcard_Definition);
+            termText = itemView.findViewById(R.id.tv_delFlashcards_term);
+            definitionText = itemView.findViewById(R.id.tv_delFlashcards_definition);
 
         }
     }
@@ -57,30 +53,17 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
 
         //Trying to get subject name displayed.
         int id = mCursor.getInt(mCursor.getColumnIndex(QuizContract.FlashcardsTable._ID));
-
+        holder.itemView.setTag(id);
+        //-----
 
         holder.termText.setText(term);
         holder.definitionText.setText(definition);
-        holder.itemView.setTag(id);
+
     }
 
     @Override
     public int getItemCount() {
         return mCursor.getCount();
-    }
-
-
-
-     public void swapCursor(Cursor newCursor){
-        if (mCursor != null) {
-            mCursor.close();
-        }
-
-        mCursor = newCursor;
-
-        if (newCursor != null) {
-            notifyDataSetChanged();
-        }
     }
 
 }

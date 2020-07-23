@@ -7,19 +7,19 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_delFlashcards_term"
+        android:id="@+id/tv_delVideo_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:text="Empty Term"
+        android:text="Empty Title"
         android:textSize="21dp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_delFlashcards_definition"
+        android:id="@+id/tv_delVideo_url"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Empty Def."
+        android:text="Empty URL"
         android:textSize="12dp" />
 
 

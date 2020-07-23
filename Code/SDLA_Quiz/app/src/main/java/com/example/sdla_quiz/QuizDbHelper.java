@@ -19,7 +19,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
 
     //Initialise and declare variables
-    public static final String DATABASE_NAME = "StudyQuiz.db";
+    public static final String DATABASE_NAME = "SDLA_Database.db";
     public static final int DATABASE_VERSION = 1;
 
     //Declare Database
@@ -70,14 +70,26 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 SubjectsTable.TABLE_NAME + "(" + SubjectsTable._ID + ")" + "ON DELETE CASCADE" +
                 ")";
 
+        final String SQL_CREATE_VIDEOS_TABLE = "CREATE TABLE " +
+                VideosTable.TABLE_NAME + " (" +
+                VideosTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                VideosTable.COLUMN_TITLE + " TEXT, " +
+                VideosTable.COLUMN_URL + " TEXT, " +
+                VideosTable.COLUMN_SUBJECT_ID + " INTEGER, " +
+                "FOREIGN KEY(" + VideosTable.COLUMN_SUBJECT_ID + ") REFERENCES " +
+                SubjectsTable.TABLE_NAME + "(" + SubjectsTable._ID + ")" + "ON DELETE CASCADE" +
+                ")";
+
 
         db.execSQL(SQL_CREATE_SUBJECTS_TABLE);
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
         db.execSQL(SQL_CREATE_FLASHCARDS_TABLE);
+        db.execSQL(SQL_CREATE_VIDEOS_TABLE);
 
         fillSubjectsTable();
         fillQuestionsTable();
         fillFlashcardsTable();
+        fillVideosTable();
 
     }
 
@@ -86,6 +98,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + SubjectsTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionsTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + FlashcardsTable.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + VideosTable.TABLE_NAME);
         onCreate(db);
     }
 
@@ -125,6 +138,23 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     public void deleteSubject(String string) {
         db = getWritableDatabase();
         db.delete(SubjectsTable.TABLE_NAME, SubjectsTable.COLUMN_SUBJECT_NAME + "=?", new String[]{string});
+    }
+
+    public List<Subject> getAllSubjects() {
+        List<Subject> subjectList = new ArrayList<>();
+        db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + SubjectsTable.TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Subject subject = new Subject();
+                subject.setId(cursor.getInt(cursor.getColumnIndex(SubjectsTable._ID)));
+                subject.setName(cursor.getString(cursor.getColumnIndex(SubjectsTable.COLUMN_SUBJECT_NAME)));
+                subjectList.add(subject);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return subjectList;
     }
 
     private void fillQuestionsTable() {
@@ -174,23 +204,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
 
-    public List<Subject> getAllSubjects() {
-        List<Subject> subjectList = new ArrayList<>();
-        db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + SubjectsTable.TABLE_NAME, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Subject subject = new Subject();
-                subject.setId(cursor.getInt(cursor.getColumnIndex(SubjectsTable._ID)));
-                subject.setName(cursor.getString(cursor.getColumnIndex(SubjectsTable.COLUMN_SUBJECT_NAME)));
-                subjectList.add(subject);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return subjectList;
-    }
-
     public ArrayList<Question> getAllQuestions() {
         ArrayList<Question> questionList = new ArrayList<>();
         db = getReadableDatabase();
@@ -199,7 +212,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Question question = new Question();
-                question.setId(cursor.getInt(cursor.getColumnIndex(QuestionsTable._ID)));
                 question.setQuestion(cursor.getString(cursor.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
                 question.setOption1(cursor.getString(cursor.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
                 question.setOption2(cursor.getString(cursor.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));
@@ -229,7 +241,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Question question = new Question();
-                question.setId(cursor.getInt(cursor.getColumnIndex(QuestionsTable._ID)));
                 question.setQuestion(cursor.getString(cursor.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
                 question.setOption1(cursor.getString(cursor.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
                 question.setOption2(cursor.getString(cursor.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));
@@ -266,7 +277,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Flashcard flashcard = new Flashcard();
-                flashcard.setId(cursor.getInt(cursor.getColumnIndex(FlashcardsTable._ID)));
                 flashcard.setTerm(cursor.getString(cursor.getColumnIndex(FlashcardsTable.COLUMN_TERM)));
                 flashcard.setDefinition(cursor.getString(cursor.getColumnIndex(FlashcardsTable.COLUMN_DEFINITION)));
                 flashcard.setSubjectId(cursor.getInt(cursor.getColumnIndex(FlashcardsTable.COLUMN_SUBJECT_ID)));
@@ -289,7 +299,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getFlashcardsCursor(int subjectId) {
-        List<Flashcard> flashcardList = new ArrayList<>();
+       // unused??? List<Flashcard> flashcardList = new ArrayList<>();
         db = getReadableDatabase();
 
         String selection = FlashcardsTable.COLUMN_SUBJECT_ID + " = ? ";
@@ -319,7 +329,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Flashcard flashcard = new Flashcard();
-                flashcard.setId(cursor.getInt(cursor.getColumnIndex(FlashcardsTable._ID)));
                 flashcard.setTerm(cursor.getString(cursor.getColumnIndex(FlashcardsTable.COLUMN_TERM)));
                 flashcard.setDefinition(cursor.getString(cursor.getColumnIndex(FlashcardsTable.COLUMN_DEFINITION)));
                 flashcard.setSubjectId(cursor.getInt(cursor.getColumnIndex(FlashcardsTable.COLUMN_SUBJECT_ID)));
@@ -346,6 +355,40 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         insertFlashcard(f6);
         Flashcard f7 = new Flashcard("TEST FLASHCARD 7", "PROGRAMMING", 1);
         insertFlashcard(f7);
-
     }
+
+    public void addVideo(Video video) {
+        db = getWritableDatabase();
+        insertVideo(video);
+    }
+
+    public void insertVideo(Video video) {
+        ContentValues cv = new ContentValues();
+        cv.put(VideosTable.COLUMN_TITLE, video.getTitle());
+        cv.put(VideosTable.COLUMN_URL, video.getUrl());
+        cv.put(VideosTable.COLUMN_SUBJECT_ID, video.getSubjectId());
+        db.insert(VideosTable.TABLE_NAME, null, cv);
+    }
+
+    public void fillVideosTable(){
+        Video v1 = new Video("TEST VIDEO", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1);
+        addVideo(v1);
+    }
+
+    public Cursor getVideosCursor(int subjectId) {
+        db = getReadableDatabase();
+
+        String selection = VideosTable.COLUMN_SUBJECT_ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(subjectId)};
+
+        Cursor cursor = db.query(VideosTable.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        return cursor;
+    }
+
 }

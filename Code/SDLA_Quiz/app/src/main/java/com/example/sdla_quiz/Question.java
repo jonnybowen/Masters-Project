@@ -10,7 +10,7 @@ public class Question implements Parcelable {
     public static final String difficultyMedium = "Medium";
     public static final String difficultyHard = "Hard";
 
-    private int id;
+    //Declare Variables
     private String question;
     private String option1;
     private String option2;
@@ -36,7 +36,6 @@ public class Question implements Parcelable {
     }
 
     protected Question(Parcel in) {
-        id = in.readInt();
         question = in.readString();
         option1 = in.readString();
         option2 = in.readString();
@@ -74,13 +73,6 @@ public class Question implements Parcelable {
         }
     };
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getQuestion() {
         return question;

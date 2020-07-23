@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FlashcardDeleteFlashcardActivity"></activity>
+        <activity android:name=".VideoBrowseVideosActivity"></activity>
+        <activity android:name=".VideoNewVideoActivity" />
+        <activity android:name=".VideoMenuActivity" />
+        <activity android:name=".FlashcardDeleteFlashcardActivity" />
         <activity android:name=".FlashcardNewFlashcardActivity" />
         <activity android:name=".FlashcardMenuActivity" />
         <activity android:name=".FlashcardViewFlashcardActivity" />
