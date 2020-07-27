@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button subjectsButton;
     Button flashcardsButton;
     Button videosButton;
+    Button notesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         subjectsButton = (Button) findViewById(R.id.btn_menu_Subjects);
         flashcardsButton = (Button) findViewById(R.id.btn_menu_flashcards);
         videosButton = (Button) findViewById(R.id.btn_menu_videos);
+        notesButton = (Button) findViewById(R.id.btn_menu_notes);
 
 
         /**
@@ -62,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, VideoMenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        notesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NoteMenuActivity.class);
                 startActivity(intent);
             }
         });

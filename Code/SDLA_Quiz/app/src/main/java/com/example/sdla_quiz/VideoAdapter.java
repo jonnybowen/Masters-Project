@@ -1,10 +1,13 @@
 package com.example.sdla_quiz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,11 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
 
     private Context mContext;
     private Cursor mCursor;
+
+    public static final String EXTRA_URL = "extraUrl";
+
+    private String title;
+    private String url;
 
 
     public VideoAdapter(Context context, Cursor cursor) {
@@ -25,11 +33,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
 
         public TextView titleText;
         public TextView urlText;
+        LinearLayout parentLayout;
 
         public VideoViewHolder(@NonNull View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.tv_delVideo_title);
             urlText = itemView.findViewById(R.id.tv_delVideo_url);
+            parentLayout = itemView.findViewById(R.id.video_ParentLayout);
 
         }
     }
@@ -44,22 +54,31 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final VideoViewHolder holder, int position) {
         if (!mCursor.moveToPosition(position)) {
             return;
         }
 
-        String title = mCursor.getString(mCursor.getColumnIndex(QuizContract.VideosTable.COLUMN_TITLE));
-        String url = mCursor.getString(mCursor.getColumnIndex(QuizContract.VideosTable.COLUMN_URL));
+        title = mCursor.getString(mCursor.getColumnIndex(QuizContract.VideosTable.COLUMN_TITLE));
+         url = mCursor.getString(mCursor.getColumnIndex(QuizContract.VideosTable.COLUMN_URL));
+
 
         //---Trying to get subject name displayed.---
-        int id = mCursor.getInt(mCursor.getColumnIndex(QuizContract.VideosTable._ID));
-        holder.itemView.setTag(id);
+       // int id = mCursor.getInt(mCursor.getColumnIndex(QuizContract.VideosTable._ID));
+       // holder.itemView.setTag(id);
         //-----
 
         holder.titleText.setText(title);
         holder.urlText.setText(url);
 
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, VideoViewVideosActivity.class);
+                intent.putExtra(EXTRA_URL, url);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

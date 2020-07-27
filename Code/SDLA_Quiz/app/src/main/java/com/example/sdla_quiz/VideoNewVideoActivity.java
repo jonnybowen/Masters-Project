@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class VideoNewVideoActivity extends AppCompatActivity {
 
@@ -50,9 +52,11 @@ public class VideoNewVideoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setTitleString(title.getText().toString());
-                setUrlString(url.getText().toString());
+                setUrlString(extractYTId(url.getText().toString())); //Extract video ID and save it
                 Subject selectedSubject = (Subject) subjectSpinner.getSelectedItem(); //temp holder for subject string
                 setSubjectId(selectedSubject.getId()); //convert subject string to int
+
+
 
                 //Create video object from inputs and add to collection
                 Video video = new Video(getTitleString(), getUrlString(), getSubjectId());
@@ -76,6 +80,20 @@ public class VideoNewVideoActivity extends AppCompatActivity {
         ArrayAdapter<Subject> adapterSubjects = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subjects);
         adapterSubjects.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjectSpinner.setAdapter(adapterSubjects);
+    }
+
+    //Takes a full youtube video address and returns the youtube video id as a string.
+    //Taken from https://stackoverflow.com/questions/24048308/how-to-get-the-video-id-from-a-youtube-url-with-regex-in-java
+    public static String extractYTId(String ytUrl) {
+        String videoID = null;
+        Pattern pattern = Pattern.compile(
+                "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
+                Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(ytUrl);
+        if (matcher.matches()){
+            videoID = matcher.group(1);
+        }
+        return videoID;
     }
 
     public String getTitleString() {
