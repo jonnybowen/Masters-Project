@@ -26,7 +26,7 @@ public class NoteMenuActivity extends AppCompatActivity {
         viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NoteMenuActivity.this, NoteViewNotesActivity.class);
+                Intent intent = new Intent(NoteMenuActivity.this, NoteBrowseNotesActivity.class);
                 startActivity(intent);
             }
         });
