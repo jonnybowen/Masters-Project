@@ -10,16 +10,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Custom adapter class to convert note objects to a recycler view
+ */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
-    private ArrayList<Note> noteList = new ArrayList<>();
+    //Declare vars
+    private ArrayList<Note> noteList;
     private OnNoteListener mOnNoteListener;
 
+    /**
+     * Constructor for the adapter
+     *
+     * @param noteList
+     * @param onNoteListener
+     */
     public NoteAdapter(ArrayList<Note> noteList, OnNoteListener onNoteListener) {
         this.noteList = noteList;
         this.mOnNoteListener = onNoteListener;
     }
 
+    /**
+     * Instantiates and returns a new viewholder object
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,23 +44,42 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         return new ViewHolder(view, mOnNoteListener);
     }
 
+    /**
+     * Sets attributes to the viewholder object.
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.timestamp.setText(noteList.get(position).getTimestamp());
         holder.title.setText(noteList.get(position).getTitle());
     }
 
+    /**
+     * Returns size of the array list
+     * @return notelist size
+     */
     @Override
     public int getItemCount() {
         return noteList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+    /**
+     * Custom view holder class to display the title and a timestamp for each note.
+     */
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
         TextView timestamp;
         OnNoteListener onNoteListener;
 
+        /**
+         * Constructor for the view holder
+         *
+         * @param itemView
+         * @param onNoteListener
+         */
         public ViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
             title = itemView.findViewById(R.id.note_title);
@@ -60,8 +96,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     }
 
 
-    //interface to interpret click
-    public interface OnNoteListener{
+    /**
+     *  interface to interpret click on item
+     */
+    public interface OnNoteListener {
         void onNoteClick(int position);
     }
 

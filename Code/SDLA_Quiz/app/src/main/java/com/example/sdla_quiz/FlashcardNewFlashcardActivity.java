@@ -2,18 +2,19 @@ package com.example.sdla_quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
+/**
+ * This activity class allows users to create new flashcards.
+ */
 public class FlashcardNewFlashcardActivity extends AppCompatActivity {
 
     //Declare TextViews
@@ -32,6 +33,11 @@ public class FlashcardNewFlashcardActivity extends AppCompatActivity {
     private String definition;
     private int subjectId;
 
+    /**
+     * onCreate - Loads UI and applies relevant logic to buttons.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +64,11 @@ public class FlashcardNewFlashcardActivity extends AppCompatActivity {
                 setTerm(etTerm.getText().toString());
                 setDefinition(etDefinition.getText().toString());
                 Subject selectedSubject = (Subject) subjectSpinner.getSelectedItem(); //temp holder for subject string
-                setSubjectId(selectedSubject.getId()); //convert subject string to int
+                setSubjectId(selectedSubject.getId()); //convert subject string to int and store
 
                 //Create flashcard from inputs and add to collection
                 Flashcard f = new Flashcard(getTerm(), getDefinition(), getSubjectId());
-                QuizDbHelper.getInstance(FlashcardNewFlashcardActivity.this).addFlashcard(f);
+                DbHelper.getInstance(FlashcardNewFlashcardActivity.this).insertFlashcard(f);
 
                 //Inform user of success.
                 Toast.makeText(FlashcardNewFlashcardActivity.this, "Flashcard added to collection: " + subjectSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
@@ -74,36 +80,67 @@ public class FlashcardNewFlashcardActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Loads a list of all available subjects into a spinner (UI).
+     */
     private void loadSubjects() {
-        QuizDbHelper dbHelper = QuizDbHelper.getInstance(this);
+        DbHelper dbHelper = DbHelper.getInstance(this);
         List<Subject> subjects = dbHelper.getAllSubjects();
         ArrayAdapter<Subject> adapterSubjects = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subjects);
         adapterSubjects.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjectSpinner.setAdapter(adapterSubjects);
     }
 
-
+    /**
+     * Accessor method to get the term
+     *
+     * @return term
+     */
     public String getTerm() {
         return term;
     }
 
+    /**
+     * Accessor method to set the term
+     *
+     * @param term
+     */
     public void setTerm(String term) {
         this.term = term;
     }
 
+    /**
+     * Accessor method to get the definition
+     *
+     * @return
+     */
     public String getDefinition() {
         return definition;
     }
 
+    /**
+     * Accessor method to set the definition
+     *
+     * @param definition
+     */
     public void setDefinition(String definition) {
         this.definition = definition;
     }
 
+    /**
+     * Accessor method to get the subject id
+     *
+     * @return subjectId
+     */
     public int getSubjectId() {
         return subjectId;
     }
 
+    /**
+     * Accessor method to set the subject id
+     *
+     * @param subjectId
+     */
     public void setSubjectId(int subjectId) {
         this.subjectId = subjectId;
     }

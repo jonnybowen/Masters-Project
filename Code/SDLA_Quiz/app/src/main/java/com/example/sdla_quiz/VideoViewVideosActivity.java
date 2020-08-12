@@ -10,8 +10,13 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+/**
+ * This activity class allows users to view videos without leaving the app.
+ * (Currently only works for youtube videos.)
+ */
 public class VideoViewVideosActivity extends YouTubeBaseActivity {
 
+    //Declare UI
     YouTubePlayerView youTubePlayer;
     Button btnPlay;
     YouTubePlayer.OnInitializedListener mOnInitListener;
@@ -19,6 +24,11 @@ public class VideoViewVideosActivity extends YouTubeBaseActivity {
     //Declare variables
     private String videoID;
 
+    /**
+     * onCreate - Initialise UI, set button logic and initialise video from selected URL.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,7 @@ public class VideoViewVideosActivity extends YouTubeBaseActivity {
         Intent intent = getIntent();
         videoID = intent.getStringExtra(VideoAdapter.EXTRA_URL);
 
+        //Initialise video but do not start.
         mOnInitListener = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
@@ -47,14 +58,14 @@ public class VideoViewVideosActivity extends YouTubeBaseActivity {
             }
         };
 
+        //Play button - starts the video
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              youTubePlayer.initialize(YouTubeConfig.getApiKey(), mOnInitListener);
+                youTubePlayer.initialize(YouTubeConfig.getApiKey(), mOnInitListener);
             }
         });
     }
-
 
 
 }

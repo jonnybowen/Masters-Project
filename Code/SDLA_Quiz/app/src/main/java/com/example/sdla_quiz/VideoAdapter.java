@@ -7,28 +7,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * A custom adapter for videos. Allows for videos to be read from the database and listed
+ * in a custom recyclerview layout.
+ */
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHolder> {
 
+    //Declare vars
     private Context mContext;
     private Cursor mCursor;
-
-    public static final String EXTRA_URL = "extraUrl";
-
     private String title;
     private String url;
 
+    //Declare constants
+    public static final String EXTRA_URL = "extraUrl";
 
+    /**
+     * Constructor
+     *
+     * @param context
+     * @param cursor
+     */
     public VideoAdapter(Context context, Cursor cursor) {
         mContext = context;
         mCursor = cursor;
     }
 
+    /**
+     * Constructor for the Video view holder.
+     */
     public class VideoViewHolder extends RecyclerView.ViewHolder {
 
         public TextView titleText;
@@ -40,11 +52,17 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
             titleText = itemView.findViewById(R.id.tv_delVideo_title);
             urlText = itemView.findViewById(R.id.tv_delVideo_url);
             parentLayout = itemView.findViewById(R.id.video_ParentLayout);
-
         }
     }
 
 
+    /**
+     * Assigns custom layout to the view, and returns a new Viewholder
+     *
+     * @param parent
+     * @param viewType
+     * @return FlashcardViewHolder
+     */
     @NonNull
     @Override
     public VideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,24 +71,27 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         return new VideoViewHolder(view);
     }
 
+    /**
+     * Recycle view by assigning new data to it. If entry is clicked, launch view activity
+     * using the selected video's url.
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull final VideoViewHolder holder, int position) {
         if (!mCursor.moveToPosition(position)) {
             return;
         }
 
-        title = mCursor.getString(mCursor.getColumnIndex(QuizContract.VideosTable.COLUMN_TITLE));
-         url = mCursor.getString(mCursor.getColumnIndex(QuizContract.VideosTable.COLUMN_URL));
+        title = mCursor.getString(mCursor.getColumnIndex(DbContract.VideosTable.COLUMN_TITLE));
+        url = mCursor.getString(mCursor.getColumnIndex(DbContract.VideosTable.COLUMN_URL));
 
-
-        //---Trying to get subject name displayed.---
-       // int id = mCursor.getInt(mCursor.getColumnIndex(QuizContract.VideosTable._ID));
-       // holder.itemView.setTag(id);
-        //-----
 
         holder.titleText.setText(title);
         holder.urlText.setText(url);
 
+        //On-click - load the video in a new activity.
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +102,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         });
     }
 
+    // Override (required implementation) - return count of data in cursor.
     @Override
     public int getItemCount() {
         return mCursor.getCount();

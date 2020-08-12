@@ -8,7 +8,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -18,9 +17,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
 
+/**
+ * This activity starts a quiz with previously selected parameters.
+ * Users are offered questions from a subject (based on difficulty) until no more questions remain.
+ * Users score is recorded and compared against the high score.
+ */
 public class QuizActivity extends AppCompatActivity {
 
     //UI DECLARATIONS
@@ -42,12 +45,13 @@ public class QuizActivity extends AppCompatActivity {
     private Button confirmNextButton; // Dynamically changes text once a question has been answered.
 
     //Colour variables
-    private ColorStateList radioBtnDefColor; // holds the default colour of radio the buttons
+    private ColorStateList radioBtnDefColor; // holds the default colour of the radio buttons
     private ColorStateList countdownDefColor; // holds the default colour of the countdown timer
 
     //END OF UI DECLARATIONS
     //-------------
 
+    //Declare Vars
     private ArrayList<Question> questionList;
     private int questionCounter;
     private int questionCounterTotal;
@@ -59,16 +63,20 @@ public class QuizActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long timeLeftMillis;
 
+    //Declare constants
     private static final String KEY_SCORE = "keyScore";
     private static final String KEY_QUESTION_COUNT = "keyQuestionCount";
     private static final String KEY_MILLIS_LEFT = "keyMillisLeft";
     private static final String KEY_ANSWERED = "keyAnswered";
     private static final String KEY_QUESTION_LIST = "KeyQuestionList";
-
-
     public static final String EXTRA_SCORE = "SCORE_EXTRA";
-    private static final long COUNTDOWN_MILLIS = 31000; // 30 seconds (extra second so that timer reads 00:30 at start)
+    private static final long COUNTDOWN_MILLIS = 31000; // 30 seconds timer (extra second so that timer reads 00:30 at start)
 
+    /**
+     * On-Create - Initialise UI, Buttons, and setup quiz based on previous parameters and start it.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,19 +100,18 @@ public class QuizActivity extends AppCompatActivity {
         radioBtnDefColor = button1.getTextColors(); // save the colour of button 1 (could be 1, 2 or 3).
         countdownDefColor = tv_timer.getTextColors();
 
-        //Get difficulty from previous screen
+        //Get difficulty and subject from previous screen and apply to UI
         Intent intent = getIntent();
         int subjectId = intent.getIntExtra(QuizMenuActivity.EXTRA_SUBJECT_ID, 0);
         String subjectName = intent.getStringExtra(QuizMenuActivity.EXTRA_SUBJECT_NAME);
         String difficulty = intent.getStringExtra(QuizMenuActivity.EXTRA_DIFFICULTY);
-
 
         tv_difficulty.setText("Difficulty: " + difficulty);
         tv_subject.setText("Subject: " + subjectName);
 
         //On-Create logic. Retrieve the question list, shuffle it, and show a question.
         if (savedInstanceState == null) {
-            QuizDbHelper dbHelper = QuizDbHelper.getInstance(this);
+            DbHelper dbHelper = DbHelper.getInstance(this);
             questionList = dbHelper.getQuestions(subjectId, difficulty);
             questionCounterTotal = questionList.size(); //Establishes how many q's the quiz will be.
             Collections.shuffle(questionList); // Randomises the order of the question-list
@@ -124,7 +131,8 @@ public class QuizActivity extends AppCompatActivity {
                 showSolution();
             }
         }
-        //The dynamic confirm/next button
+        //The dynamic confirm/next button - shows confirm if an answer is selected or shows next if
+        // an answer has been locked in
         confirmNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +152,10 @@ public class QuizActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * A method to show the next question in the quiz. Resets UI elements to their defaults and
+     * shows the next question from the list.
+     */
     private void showNextQuestion() {
         //Reset Radio button colours to the default, using the variable that grabbed the colour on-create.
         button1.setTextColor(radioBtnDefColor);
@@ -180,15 +192,20 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to start the count-down timer. Contains logic for timer ticks and finish.
+     */
     private void startCountDown() {
         countDownTimer = new CountDownTimer(timeLeftMillis, 250) {
             @Override
+            // Clock ticks, update UI.
             public void onTick(long millisUntilFinished) {
                 timeLeftMillis = millisUntilFinished;
                 updateTimer();
             }
 
             @Override
+            // Time ran out, update UI and check answer
             public void onFinish() {
                 timeLeftMillis = 0;
                 updateTimer();
@@ -197,7 +214,11 @@ public class QuizActivity extends AppCompatActivity {
         }.start();
     }
 
+    /**
+     * A method to update the UI with the timer's current time.
+     */
     private void updateTimer() {
+        //convert milliseconds to human time
         int minutes = (int) (timeLeftMillis / 1000 / 60);
         int seconds = (int) (timeLeftMillis / 1000) % 60;
 
@@ -205,13 +226,19 @@ public class QuizActivity extends AppCompatActivity {
 
         tv_timer.setText(timeString);
 
+        //Change timer colour to red if <10 seconds left.
         if (timeLeftMillis < 10000) {
             tv_timer.setTextColor(Color.RED);
         } else {
+            //Change timer colour to default if >10 seconds left.
             tv_timer.setTextColor(countdownDefColor);
         }
     }
 
+    /**
+     * Method to finish the quiz. Will take the current score as extra
+     * for comparison against high-score.
+     */
     private void finishQuiz() {
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
@@ -219,8 +246,9 @@ public class QuizActivity extends AppCompatActivity {
         finish(); // close the activity
     }
 
-    //Checks if answer is right by converting the selection into a number, then check the number against the
-    // question database, answer column.
+    /**
+     * Checks if user's answer matches the correct answer then shows the solution.
+     */
     private void checkAnswer() {
         answerLocked = true;
         countDownTimer.cancel();
@@ -228,6 +256,7 @@ public class QuizActivity extends AppCompatActivity {
         RadioButton radioButtonSelected = findViewById(radioGroup.getCheckedRadioButtonId());
         int answerNo = radioGroup.indexOfChild(radioButtonSelected) + 1; // add 1 to match answer numbers
 
+        //Increment score if user is correct
         if (answerNo == currentQuestion.getAnswerNo()) {
             score++;
             tv_score.setText("Correct: " + score);
@@ -236,7 +265,9 @@ public class QuizActivity extends AppCompatActivity {
         showSolution();
     }
 
-    // Colour all answers red, but make the correct answer green.
+    /**
+     * Reveals the correct answer to the user. Colour all answers red, but make the correct answer green.
+     */
     private void showSolution() {
         button1.setTextColor(Color.RED);
         button2.setTextColor(Color.RED);
@@ -257,23 +288,34 @@ public class QuizActivity extends AppCompatActivity {
                 break;
         }
         if (questionCounter < questionCounterTotal) {
+            // Quiz still going
             confirmNextButton.setText("Next");
         } else {
+            // Quiz finished, offer finish button.
             confirmNextButton.setText("Finish!");
         }
     }
 
+    /**
+     * Override back arrow press. Require a double-tap confirmation of the back arrow to exit.
+     * Intention is to prevent accidentally losing quiz progress.
+     */
     @Override
     public void onBackPressed() {
+        //Require 2 seconds of press time to quit
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             finishQuiz();
         } else {
+            //Less than 2 seconds pressed, remind user how to quit.
             Toast.makeText(QuizActivity.this, "Press back again to quit.", Toast.LENGTH_LONG).show();
         }
         backPressedTime = System.currentTimeMillis();
 
     }
 
+    /**
+     * Stop countdown if activity is destroyed.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -282,6 +324,11 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Save screen state when changing orientation of screen.
+     *
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         // Deleted Persistent bundle state parameter because it crashed the quiz when rotated.

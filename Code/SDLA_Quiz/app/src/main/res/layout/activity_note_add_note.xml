@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoteAddNoteActivity" >
+
+    <TextView
+        android:id="@+id/TV_newNote_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Instructions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.sdla_quiz.LinedEditText
+        android:id="@+id/LET_newNote_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/lightYellow"
+        android:gravity="center_horizontal"
+        android:hint="add a title"
+        app:layout_constraintTop_toBottomOf="@+id/TV_newNote_intro"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+    <com.example.sdla_quiz.LinedEditText
+        android:id="@+id/LET_newNote_content"
+        android:layout_width="match_parent"
+        android:layout_height="431dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/lightYellow"
+        android:gravity="top"
+        android:hint="add your note here"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LET_newNote_title" />
+
+    <Button
+        android:id="@+id/btn_newNote_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LET_newNote_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

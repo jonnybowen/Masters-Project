@@ -7,12 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * This activity class allows users to launch a Subject related activity.
+ * Users may create a new subject, or delete existing ones.
+ */
 public class SubjectsMenuActivity extends AppCompatActivity {
 
     //Declare Buttons
     Button newSubjectBtn;
     Button delSubjectBtn;
 
+    /**
+     * OnCreate - Initialise UI and apply button logic.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +32,7 @@ public class SubjectsMenuActivity extends AppCompatActivity {
         delSubjectBtn = findViewById(R.id.btn_subjectsMenu_deleteSubject);
 
 
+        //New subject Button - take user to new subject activity
         newSubjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,6 +41,7 @@ public class SubjectsMenuActivity extends AppCompatActivity {
             }
         });
 
+        //Delete subject Button - take user to delete subject activity
         delSubjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

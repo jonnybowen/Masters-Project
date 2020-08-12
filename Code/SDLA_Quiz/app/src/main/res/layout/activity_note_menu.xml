@@ -4,14 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoteMenuActivity">
+    tools:context=".NoteMenuActivity"
+    android:background="@drawable/background_yellow">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/browseNotes_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/btn_noteMenu_viewNotes"
+        android:id="@+id/imgbtn_notes_browse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_margin="32dp"
+        android:background="@color/darkGrey"
+        android:drawableEnd="@drawable/flashmenu_add"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
+        android:text="Browse Subject"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/noteMenu_subjectSpinner"
+        tools:layout_editor_absoluteX="32dp" />
+
+    <Spinner
+        android:id="@+id/noteMenu_subjectSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
+        android:text="Select a subject, then click the button to view its notes!"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_notemenu_title" />
+
+    <TextView
+        android:id="@+id/tv_notemenu_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Notes"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/cairo"
+        android:text="Notes"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

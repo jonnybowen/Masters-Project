@@ -4,45 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_blue"
     tools:context=".FlashcardMenuActivity">
+
+    <TextView
+        android:id="@+id/tv_notesMenu_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
+        android:text="Select a subject, then choose an action."
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_flashcards_screentitle" />
 
     <Spinner
         android:id="@+id/spinner_flashcardMenu_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_flashcardMenu_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="@color/darkGrey"
+        android:drawableEnd="@drawable/flashnotes_collection_icon"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
         android:text="View"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_flashcardMenu_subject" />
 
     <Button
         android:id="@+id/btn_flashcardMenu_create"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="@color/darkGrey"
+        android:drawableEnd="@drawable/flashmenu_add"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
         android:text="Create"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_flashcardMenu_view" />
 
     <Button
         android:id="@+id/btn_flashcardMenu_delete"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="@color/darkGrey"
+        android:drawableEnd="@drawable/flashnotes_delete_icon"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
         android:text="Delete"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_flashcardMenu_create" />
+
+    <TextView
+        android:id="@+id/tv_flashcards_screentitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/cairo"
+        android:text="FLASHCARDS"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

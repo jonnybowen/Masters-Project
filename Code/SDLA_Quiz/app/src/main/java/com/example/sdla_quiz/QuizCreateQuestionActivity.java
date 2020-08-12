@@ -2,7 +2,6 @@ package com.example.sdla_quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +12,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
+/**
+ * This activity class allows users to create new quiz questions.
+ */
 public class QuizCreateQuestionActivity extends AppCompatActivity {
     //Declare Buttons
     private Button addQuestionButton;
@@ -37,6 +39,11 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     private String newDifficulty;
     private int newSubject;
 
+    /**
+     * OnCreate - Initialise UI and apply logic to buttons.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +68,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
         loadSubjects();
         loadDifficultyLevels();
 
+        //Add Button - Creates a new Question from user inputs and saves it to the database.
         addQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,9 +83,10 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
                 setNewSubject(selectedSubject.getId()); //convert subject string to int
 
                 Question q = new Question(newQuestion, newOption1, newOption2, newOption3, newAnswerId, newDifficulty, newSubject);
-                QuizDbHelper.getInstance(QuizCreateQuestionActivity.this).addQuestion(q);
+                DbHelper.getInstance(QuizCreateQuestionActivity.this).insertQuestion(q);
                 Toast.makeText(QuizCreateQuestionActivity.this, "Question added to database", Toast.LENGTH_SHORT).show();
 
+                //Reset UI for new input.
                 et_Question.setText("");
                 et_Option1.setText("");
                 et_Option2.setText("");
@@ -88,14 +97,20 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Loads a list of all available subjects into a spinner (UI).
+     */
     private void loadSubjects() {
-        QuizDbHelper dbHelper = QuizDbHelper.getInstance(this);
+        DbHelper dbHelper = DbHelper.getInstance(this);
         List<Subject> subjects = dbHelper.getAllSubjects();
         ArrayAdapter<Subject> adapterSubjects = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subjects);
         adapterSubjects.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjectSpinner.setAdapter(adapterSubjects);
     }
 
+    /**
+     * Loads a list of all difficulty levels into a spinner (UI).
+     */
     private void loadDifficultyLevels() {
         //Assign difficulty levels array to spinner using adapter.
         String[] difficultyLevels = Question.getAllDifficultyLevels();
@@ -105,58 +120,68 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
         difficultySpinner.setAdapter(adapterDifficulty);
     }
 
-    public String getNewQuestion() {
-        return newQuestion;
-    }
 
+    /**
+     * Accessor method to set the new question
+     *
+     * @param newQuestion
+     */
     public void setNewQuestion(String newQuestion) {
         this.newQuestion = newQuestion;
     }
 
-    public String getNewOption1() {
-        return newOption1;
-    }
 
+    /**
+     * Accessor method to set the new option 1
+     *
+     * @param newOption1
+     */
     public void setNewOption1(String newOption1) {
         this.newOption1 = newOption1;
     }
 
-    public String getNewOption2() {
-        return newOption2;
-    }
 
+    /**
+     * Accessor method to set the new option 2
+     *
+     * @param newOption2
+     */
     public void setNewOption2(String newOption2) {
         this.newOption2 = newOption2;
     }
 
-    public String getNewOption3() {
-        return newOption3;
-    }
-
+    /**
+     * Accessor method to set the new option 3
+     *
+     * @param newOption3
+     */
     public void setNewOption3(String newOption3) {
         this.newOption3 = newOption3;
     }
 
-    public int getNewAnswerId() {
-        return newAnswerId;
-    }
-
+    /**
+     * Accessor method to set the answer id
+     *
+     * @param newAnswerId
+     */
     public void setNewAnswerId(int newAnswerId) {
         this.newAnswerId = newAnswerId;
     }
 
-    public String getNewDifficulty() {
-        return newDifficulty;
-    }
-
+    /**
+     * Accessor method to set the new difficulty
+     *
+     * @param newDifficulty
+     */
     public void setNewDifficulty(String newDifficulty) {
         this.newDifficulty = newDifficulty;
     }
 
-    public int getNewSubject() {
-        return newSubject;
-    }
-
+    /**
+     * Accessor method to set the new subject
+     *
+     * @param newSubject
+     */
     public void setNewSubject(int newSubject) {
         this.newSubject = newSubject;
     }

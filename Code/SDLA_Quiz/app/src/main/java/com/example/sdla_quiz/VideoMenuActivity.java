@@ -1,17 +1,21 @@
 package com.example.sdla_quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * This activity class allows users to launch a video related activity.
+ * Users may select options to browse existing videos (by subject), add new videos and delete videos.
+ */
 public class VideoMenuActivity extends AppCompatActivity {
 
     //Declare Constants
@@ -19,13 +23,16 @@ public class VideoMenuActivity extends AppCompatActivity {
 
     //Declare Buttons
     Button addBtn;
-    Button editBtn;
     Button browseBtn;
 
     //Declare Views
     TextView intro;
     Spinner subjectSpinner;
 
+    /**
+     * onCreate - Initialise UI components and set button logic.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +40,12 @@ public class VideoMenuActivity extends AppCompatActivity {
 
         //Init Buttons
         addBtn = (Button) findViewById(R.id.btn_videoMenu_add);
-        //editBtn = (Button) findViewById(R.id.btn_videoMenu_edit);
         browseBtn = (Button) findViewById(R.id.btn_videoMenu_browse);
 
         //Init Views
         intro = (TextView) findViewById(R.id.tv_videoMenu_intro);
         subjectSpinner = (Spinner) findViewById(R.id.spinner_videoMenu);
         loadSubjects(); // populate spinner with subjects
-
 
         //Browse Button
         browseBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,15 +65,20 @@ public class VideoMenuActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Loads a list of all available subjects into a spinner (UI).
+     */
     private void loadSubjects() {
-        QuizDbHelper dbHelper = QuizDbHelper.getInstance(this);
+        DbHelper dbHelper = DbHelper.getInstance(this);
         List<Subject> subjects = dbHelper.getAllSubjects();
         ArrayAdapter<Subject> adapterSubjects = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subjects);
         adapterSubjects.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjectSpinner.setAdapter(adapterSubjects);
     }
 
+    /**
+     * Launches the 'browse videos' activity for chosen subject. Pass relevant extras.
+     */
     private void browseVideos() {
         //Retrieve subject from spinner
         Subject selectedSubject = (Subject) subjectSpinner.getSelectedItem();

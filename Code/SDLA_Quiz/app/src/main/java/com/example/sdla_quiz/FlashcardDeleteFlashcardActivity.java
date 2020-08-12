@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This activity class allows users to browse and delete flashcards from their database.
+ */
 public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
 
     //Declare Views
@@ -24,13 +27,19 @@ public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
     //Declare Database
     private SQLiteDatabase mDatabase;
 
+    /**
+     * Initialise UI (using custom adapter) and database. Assigns an itemtouchhelper to the
+     * recyclerview.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_delete_flashcard);
 
         //Initialise Database
-        QuizDbHelper dbHelper = new QuizDbHelper(this);
+        DbHelper dbHelper = new DbHelper(this);
         mDatabase = dbHelper.getWritableDatabase();
 
         //Retrieve subject from previous screen
@@ -41,7 +50,7 @@ public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
         introText = findViewById(R.id.tv_delFlashcards_intro);
         recyclerView = findViewById(R.id.recyclerView_delFlashcards);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new FlashcardAdapter(this, QuizDbHelper.getInstance(FlashcardDeleteFlashcardActivity.this).getFlashcardsCursor(subjectId));
+        mAdapter = new FlashcardAdapter(this, DbHelper.getInstance(FlashcardDeleteFlashcardActivity.this).getFlashcardsCursor(subjectId));
         recyclerView.setAdapter(mAdapter);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -51,16 +60,22 @@ public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
             }
 
             @Override
+            //TODO get ID of swiped viewholder and delete it from database.
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            removeItem((int) viewHolder.itemView.getTag());
+                removeItem((int) viewHolder.itemView.getTag());
             }
         }).attachToRecyclerView(recyclerView);
     }
 
 
-    private void removeItem(int id){
-        mDatabase.delete(QuizContract.FlashcardsTable.TABLE_NAME,
-                QuizContract.FlashcardsTable._ID + "=" + id, null);
-        Toast.makeText(FlashcardDeleteFlashcardActivity.this,"Flashcard deleted from collection.", Toast.LENGTH_LONG).show();
+    /**
+     * Deletes selected flashcard from the database then informs user
+     *
+     * @param id
+     */
+    private void removeItem(int id) {
+        mDatabase.delete(DbContract.FlashcardsTable.TABLE_NAME,
+                DbContract.FlashcardsTable._ID + "=" + id, null);
+        Toast.makeText(FlashcardDeleteFlashcardActivity.this, "Flashcard deleted from collection.", Toast.LENGTH_LONG).show();
     }
 }

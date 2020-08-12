@@ -1,17 +1,16 @@
 package com.example.sdla_quiz;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.TextView;
 
+/**
+ * This activity class allows users to browse videos by subject.
+ */
 public class VideoBrowseVideosActivity extends AppCompatActivity {
 
     //Declare Views
@@ -21,11 +20,15 @@ public class VideoBrowseVideosActivity extends AppCompatActivity {
     //Declare Adapter
     private VideoAdapter mAdapter;
 
+    /**
+     * onCreate - Initialises ui components, then initialises the recycler view based on subject.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_browse_videos);
-
 
         //Retrieve subject from previous screen
         Intent intent = getIntent();
@@ -35,7 +38,9 @@ public class VideoBrowseVideosActivity extends AppCompatActivity {
         introText = findViewById(R.id.tv_browseVideos_intro);
         recyclerView = findViewById(R.id.recyclerView_browseVideos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new VideoAdapter(this, QuizDbHelper.getInstance(VideoBrowseVideosActivity.this).getVideosCursor(subjectId));
+        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
+        recyclerView.addItemDecoration(itemDecorator);
+        mAdapter = new VideoAdapter(this, DbHelper.getInstance(VideoBrowseVideosActivity.this).getVideosCursor(subjectId));
         recyclerView.setAdapter(mAdapter);
     }
 }

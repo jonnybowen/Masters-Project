@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * The 'home' screen of the app. Acts as a launcher to access features of the app.
@@ -15,35 +16,42 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     //Declare Buttons
-    Button quizButton;
-    Button subjectsButton;
-    Button flashcardsButton;
-    Button videosButton;
-    Button notesButton;
+    ImageButton quizButton;
+    ImageButton subjectsButton;
+    ImageButton flashcardsButton;
+    ImageButton videosButton;
+    ImageButton notesButton;
+    ImageButton settingsButton;
 
+    /**
+     * onCreate - Initialises UI and applies logic to buttons.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //Initialise Buttons
-        quizButton = (Button) findViewById(R.id.btn_menu_quiz);
-        subjectsButton = (Button) findViewById(R.id.btn_menu_Subjects);
-        flashcardsButton = (Button) findViewById(R.id.btn_menu_flashcards);
-        videosButton = (Button) findViewById(R.id.btn_menu_videos);
-        notesButton = (Button) findViewById(R.id.btn_menu_notes);
+        quizButton = (ImageButton) findViewById(R.id.imgbtn_menu_quiz);
+        subjectsButton = (ImageButton) findViewById(R.id.imgbtn_menu_subjects);
+        flashcardsButton = (ImageButton) findViewById(R.id.imgbtn_menu_flashcards);
+        videosButton = (ImageButton) findViewById(R.id.imgbtn_menu_videos);
+        notesButton = (ImageButton) findViewById(R.id.imgbtn_menu_notes);
+        settingsButton = (ImageButton) findViewById(R.id.imgbtn_menu_settings);
 
 
-        /**
-         * The quiz button. Takes the user to the quiz feature when clicked.
-         */
+        //The quiz button. Takes the user to the quiz feature when clicked.
         quizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startQuiz();
+                Intent quizIntent = new Intent(MainActivity.this, QuizMenuActivity.class);
+                startActivity(quizIntent);
             }
         });
 
+        //The subjects button. Takes the user to the subjects menu when clicked
         subjectsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //The flashcards button. Takes the user to the flashcards menu when clicked
         flashcardsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //The video button. Takes the user to the video menu when clicked
         videosButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //The notes button. Takes the user to the notes menu when clicked
         notesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,9 +89,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void startQuiz() {
-        //Create intent for quiz activity and start it.
-        Intent quizIntent = new Intent(MainActivity.this, QuizMenuActivity.class);
-        startActivity(quizIntent);
-    }
+
 }

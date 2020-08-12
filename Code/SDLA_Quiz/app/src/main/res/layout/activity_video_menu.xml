@@ -4,54 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VideoMenuActivity">
+    tools:context=".VideoMenuActivity"
+    android:background="@drawable/background_red">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/browseNotes_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
 
     <Button
         android:id="@+id/btn_videoMenu_browse"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="32dp"
         android:layout_marginTop="32dp"
-        android:text="Browse"
+        android:background="@color/darkGrey"
+        android:drawableEnd="@drawable/flashmenu_add"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
+        android:text="Browse Subject"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_videoMenu" />
 
     <TextView
-        android:id="@+id/tv_videoMenu_intro"
+        android:id="@+id/tv_videoMenu_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/cairo"
+        android:text="VIDEOS"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_videoMenu_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/cairo"
+        android:text="Select a subject, then click the button to view its videos!"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_videoMenu_title" />
 
     <Spinner
         android:id="@+id/spinner_videoMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_videoMenu_intro" />
+        app:layout_constraintTop_toTopOf="@+id/browseNotes_appBarLayout" />
 
     <Button
         android:id="@+id/btn_videoMenu_add"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="16dp"
-        android:text="add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="32dp"
+        android:background="@color/darkGrey"
+        android:drawableEnd="@drawable/flashmenu_add"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
+        android:layout_margin="32dp"
+        android:text="Add"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_videoMenu_edit" />
 
     <Button
         android:id="@+id/btn_videoMenu_edit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:text="edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:background="@color/darkGrey"
+        android:drawableEnd="@drawable/flashnotes_delete_icon"
+        android:fontFamily="@font/cairo"
+        android:gravity="center"
+        android:text="Delete"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_videoMenu_browse" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,12 @@ package com.example.sdla_quiz;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Custom data class to represent a quiz question.
+ * A question, assigned to a subject and a difficulty level , consists of a question and
+ * three options (one answer),
+ * of when it was made.
+ */
 public class Question implements Parcelable {
 
     //Constants - used to set question difficulty
@@ -19,11 +25,25 @@ public class Question implements Parcelable {
     private String difficulty;
     private int subjectID;
 
+    /**
+     * No-arg constructor
+     */
     public Question() {
 
     }
 
 
+    /**
+     * Constructor for the question class.
+     *
+     * @param question
+     * @param option1
+     * @param option2
+     * @param option3
+     * @param answerNo
+     * @param difficulty
+     * @param subjectID
+     */
     public Question(String question, String option1, String option2,
                     String option3, int answerNo, String difficulty, int subjectID) {
         this.question = question;
@@ -35,6 +55,9 @@ public class Question implements Parcelable {
         this.subjectID = subjectID;
     }
 
+    /**
+     * Constructor that creates a question from a parcel
+     */
     protected Question(Parcel in) {
         question = in.readString();
         option1 = in.readString();
@@ -45,6 +68,12 @@ public class Question implements Parcelable {
         subjectID = in.readInt();
     }
 
+    /**
+     * Creates a parcel from a question.
+     *
+     * @param dest
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(question);
@@ -56,11 +85,15 @@ public class Question implements Parcelable {
         dest.writeInt(subjectID);
     }
 
+    //Required implementation, no functionality added
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * Returns a parcel created from a note.
+     */
     public static final Creator<Question> CREATOR = new Creator<Question>() {
         @Override
         public Question createFromParcel(Parcel in) {
@@ -74,65 +107,127 @@ public class Question implements Parcelable {
     };
 
 
+    /**
+     * Accessor method to get the question
+     *
+     * @return
+     */
     public String getQuestion() {
         return question;
     }
 
+    /**
+     * Accessor method to set the question
+     *
+     * @param question
+     */
     public void setQuestion(String question) {
         this.question = question;
     }
 
+    /**
+     * Accessor method to get option 1
+     * @return option1
+     */
     public String getOption1() {
         return option1;
     }
 
+    /**
+     * Accessor method to set option 1
+     * @param option1
+     */
     public void setOption1(String option1) {
         this.option1 = option1;
     }
 
+    /**
+     * Accessor method to get option 2
+     * @return option2
+     */
     public String getOption2() {
         return option2;
     }
 
+    /**
+     * Accessor method to set option 2
+     * @param option2
+     */
     public void setOption2(String option2) {
         this.option2 = option2;
     }
 
+    /**
+     * Accessor method to get option 3
+     * @return option3
+     */
     public String getOption3() {
         return option3;
     }
 
+    /**
+     * Accessor method to set option 3
+     * @param option3
+     */
     public void setOption3(String option3) {
         this.option3 = option3;
     }
 
+    /**
+     * Accessor method to get the answer number
+     * @return answerNo
+     */
     public int getAnswerNo() {
         return answerNo;
     }
 
+    /**
+     * Accessor method to set the answer number
+     * @param answerNo
+     */
     public void setAnswerNo(int answerNo) {
         this.answerNo = answerNo;
     }
 
+    /**
+     * Accessor method to get the difficulty
+     * @return difficulty
+     */
     public String getDifficulty() {
         return difficulty;
     }
 
+    /**
+     * Accessor method to set the difficulty
+     * @param difficulty
+     */
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 
+    /**
+     * Accessor method to get the subject id
+     * @return subjectId
+     */
     public int getSubjectID() {
         return subjectID;
     }
 
+    /**
+     * Accessor method to set the subject id
+     * @param subjectID
+     */
     public void setSubjectID(int subjectID) {
         this.subjectID = subjectID;
     }
 
-    public static String[] getAllDifficultyLevels(){
+    /**
+     * Accessor method to get all difficulty levels
+     * @return string[] with all difficulties
+     */
+    public static String[] getAllDifficultyLevels() {
         return new String[]{
-            difficultyEasy, difficultyMedium, difficultyHard
+                difficultyEasy, difficultyMedium, difficultyHard
         };
     }
 }

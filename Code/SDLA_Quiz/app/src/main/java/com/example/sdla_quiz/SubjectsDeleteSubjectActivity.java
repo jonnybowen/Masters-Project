@@ -11,11 +11,21 @@ import android.widget.Toast;
 
 import java.util.List;
 
+/**
+ * This activity class allows users to browse and delete subjects from their database.
+ * Deleting a subject causes all of its notes, videos, etc to be deleted too.
+ */
 public class SubjectsDeleteSubjectActivity extends AppCompatActivity {
 
+    //Declare UI
     Spinner spin_subject;
     Button confirmDelete;
 
+    /**
+     * onCreate - Initialise UI and set button logic.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +39,18 @@ public class SubjectsDeleteSubjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String subjectNameDel = spin_subject.getSelectedItem().toString();
-                QuizDbHelper.getInstance(SubjectsDeleteSubjectActivity.this).deleteSubject(subjectNameDel);
+                DbHelper.getInstance(SubjectsDeleteSubjectActivity.this).deleteSubject(subjectNameDel);
                 Toast.makeText(SubjectsDeleteSubjectActivity.this, "Subject deleted from database", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
+    /**
+     * Loads a list of all available subjects into a spinner (UI).
+     */
     private void loadSubjects() {
-        QuizDbHelper dbHelper = QuizDbHelper.getInstance(this);
+        DbHelper dbHelper = DbHelper.getInstance(this);
         List<Subject> subjects = dbHelper.getAllSubjects();
         ArrayAdapter<Subject> adapterSubjects = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subjects);
         adapterSubjects.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
