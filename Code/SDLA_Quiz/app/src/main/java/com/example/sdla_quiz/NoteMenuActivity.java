@@ -28,6 +28,7 @@ public class NoteMenuActivity extends AppCompatActivity {
 
     /**
      * onCreate - intialise UI and button logic.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -56,6 +57,7 @@ public class NoteMenuActivity extends AppCompatActivity {
         List<Subject> subjects = dbHelper.getAllSubjects();
         ArrayAdapter<Subject> adapterSubjects = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subjects);
         adapterSubjects.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterSubjects.notifyDataSetChanged();
         subjectSpinner.setAdapter(adapterSubjects);
     }
 

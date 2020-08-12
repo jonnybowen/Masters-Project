@@ -39,6 +39,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
 
     /**
      * onCreate - Initialise ui, determine whether or not to enter edit mode.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -56,7 +57,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
         mBackArrow = findViewById(R.id.toolbar_back_arrow);
         setListeners();
 
-        if(getIncomingIntent()){
+        if (getIncomingIntent()) {
             // new note, go to edit mode
             setNewNoteProperties();
             enableEditMode();
@@ -71,7 +72,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * A method to initialise gesture listeners.
      */
-    private void setListeners(){
+    private void setListeners() {
         mContent.setOnTouchListener(this);
         mGestureDetector = new GestureDetector(this, this);
         mViewTitle.setOnClickListener(this);
@@ -81,6 +82,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
 
     /**
      * Determine whether note is new and should enter edit mode, or old and should enter view mode.
+     *
      * @return
      */
     private boolean getIncomingIntent() {
@@ -99,7 +101,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Method to disable interaction with on-screen elements for view-mode.
      */
-    private void disableContentInteraction(){
+    private void disableContentInteraction() {
         mContent.setKeyListener(null);
         mContent.setFocusable(false);
         mContent.setFocusableInTouchMode(false);
@@ -110,7 +112,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Method to enable interaction with on-screen elements for edit-mode.
      */
-    private void enableContentInteraction(){
+    private void enableContentInteraction() {
         mContent.setKeyListener(new EditText(this).getKeyListener());
         mContent.setFocusable(true);
         mContent.setFocusableInTouchMode(true);
@@ -121,7 +123,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Change ui to reflect entering Edit mode.
      */
-    private void enableEditMode(){
+    private void enableEditMode() {
         mBackArrowContainer.setVisibility(View.GONE);
         mTickContainer.setVisibility(View.VISIBLE);
 
@@ -136,7 +138,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Change ui to reflect entering view mode.
      */
-    private void disableEditMode(){
+    private void disableEditMode() {
         mBackArrowContainer.setVisibility(View.VISIBLE);
         mTickContainer.setVisibility(View.GONE);
 
@@ -151,10 +153,10 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Method to hide the virtual keyboard.
      */
-    private void hideSoftKeyboard(){
+    private void hideSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         View view = this.getCurrentFocus();
-        if (view == null){
+        if (view == null) {
             view = new View(this);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -163,7 +165,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Assign note data to UI.
      */
-    private void setNoteProperties(){
+    private void setNoteProperties() {
         mViewTitle.setText(mInitialNote.getTitle());
         mEditTitle.setText(mInitialNote.getTitle());
         mContent.setText(mInitialNote.getContent());
@@ -172,7 +174,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Set textviews to default for a new note.
      */
-    private void setNewNoteProperties(){
+    private void setNewNoteProperties() {
         mViewTitle.setText("Note Title");
         mEditTitle.setText("Note Title");
     }
@@ -242,19 +244,20 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
      * OnClick - tick - return to view mode
      * title - activate edit mode and set text cursor to end of current title.
      * back arrow - finish activity.
+     *
      * @param v
      */
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             // enter view mode
-            case R.id.tick:{
+            case R.id.tick: {
                 hideSoftKeyboard();
                 disableEditMode();
                 break;
             }
             // enable edit mode, move editing cursor to end of title string.
-            case R.id.view_note_title:{
+            case R.id.view_note_title: {
                 enableEditMode();
                 mEditTitle.requestFocus();
                 mEditTitle.setSelection(mEditTitle.length());
@@ -273,16 +276,17 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
      */
     @Override
     public void onBackPressed() {
-        if(mMode == EDIT_MODE_ENABLED) {
+        if (mMode == EDIT_MODE_ENABLED) {
             onClick(mTick);
         } else {
-        super.onBackPressed();
+            super.onBackPressed();
         }
     }
 
 
     /**
      * Saves screen state when orientation is rotated.
+     *
      * @param outState
      */
     @Override
@@ -293,13 +297,14 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
 
     /**
      * Restores screen state after orientation change.
+     *
      * @param savedInstanceState
      */
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mMode = savedInstanceState.getInt("mode");
-        if(mMode == EDIT_MODE_ENABLED){
+        if (mMode == EDIT_MODE_ENABLED) {
             enableEditMode();
         }
     }

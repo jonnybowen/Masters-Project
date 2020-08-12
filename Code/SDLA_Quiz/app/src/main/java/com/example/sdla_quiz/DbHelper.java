@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.example.sdla_quiz.DbContract.*;
 
 import androidx.annotation.Nullable;
@@ -304,7 +305,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.insert(FlashcardsTable.TABLE_NAME, null, cv);
     }
-
 
 
     /**

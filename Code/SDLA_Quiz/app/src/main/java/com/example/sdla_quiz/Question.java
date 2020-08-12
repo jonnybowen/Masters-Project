@@ -127,6 +127,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to get option 1
+     *
      * @return option1
      */
     public String getOption1() {
@@ -135,6 +136,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to set option 1
+     *
      * @param option1
      */
     public void setOption1(String option1) {
@@ -143,6 +145,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to get option 2
+     *
      * @return option2
      */
     public String getOption2() {
@@ -151,6 +154,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to set option 2
+     *
      * @param option2
      */
     public void setOption2(String option2) {
@@ -159,6 +163,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to get option 3
+     *
      * @return option3
      */
     public String getOption3() {
@@ -167,6 +172,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to set option 3
+     *
      * @param option3
      */
     public void setOption3(String option3) {
@@ -175,6 +181,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to get the answer number
+     *
      * @return answerNo
      */
     public int getAnswerNo() {
@@ -183,6 +190,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to set the answer number
+     *
      * @param answerNo
      */
     public void setAnswerNo(int answerNo) {
@@ -191,6 +199,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to get the difficulty
+     *
      * @return difficulty
      */
     public String getDifficulty() {
@@ -199,6 +208,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to set the difficulty
+     *
      * @param difficulty
      */
     public void setDifficulty(String difficulty) {
@@ -207,6 +217,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to get the subject id
+     *
      * @return subjectId
      */
     public int getSubjectID() {
@@ -215,6 +226,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to set the subject id
+     *
      * @param subjectID
      */
     public void setSubjectID(int subjectID) {
@@ -223,6 +235,7 @@ public class Question implements Parcelable {
 
     /**
      * Accessor method to get all difficulty levels
+     *
      * @return string[] with all difficulties
      */
     public static String[] getAllDifficultyLevels() {

@@ -7,10 +7,11 @@ import android.provider.BaseColumns;
  */
 public final class DbContract {
 
-    private DbContract(){}
+    private DbContract() {
+    }
 
     /**
-     *     Contract for the questions table.
+     * Contract for the questions table.
      */
     public static class QuestionsTable implements BaseColumns { //BaseColumns implements id key automagically
         public static final String TABLE_NAME = "quiz_questions";
@@ -24,7 +25,7 @@ public final class DbContract {
     }
 
     /**
-     *     Contract for the subjects table.
+     * Contract for the subjects table.
      */
     public static class SubjectsTable implements BaseColumns {
         public static final String TABLE_NAME = "Subjects";
@@ -32,7 +33,7 @@ public final class DbContract {
     }
 
     /**
-     *     Contract for the Flashcards table.
+     * Contract for the Flashcards table.
      */
     public static class FlashcardsTable implements BaseColumns {
         public static final String TABLE_NAME = "Flashcards";
@@ -42,7 +43,7 @@ public final class DbContract {
     }
 
     /**
-     *     Contract for the Videos table.
+     * Contract for the Videos table.
      */
     public static class VideosTable implements BaseColumns {
         public static final String TABLE_NAME = "Videos";
@@ -52,7 +53,7 @@ public final class DbContract {
     }
 
     /**
-     *     Contract for the Notes table.
+     * Contract for the Notes table.
      */
     public static class NotesTable implements BaseColumns {
         public static final String TABLE_NAME = "Notes";

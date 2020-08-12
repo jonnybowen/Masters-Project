@@ -89,14 +89,13 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
 
     /**
      * Return number of items currently in the cursor.
+     *
      * @return mCursor.getCount()
      */
     @Override
     public int getItemCount() {
         return mCursor.getCount();
     }
-
-
 
 
 }

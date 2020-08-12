@@ -17,11 +17,12 @@ public class Subject {
     /**
      * No-arg constructor
      */
-    public Subject(){
+    public Subject() {
     }
 
     /**
      * Constructor for subject class
+     *
      * @param name
      */
     public Subject(String name) {
@@ -30,6 +31,7 @@ public class Subject {
 
     /**
      * Accessor method to get the id
+     *
      * @return id
      */
     public int getId() {
@@ -38,6 +40,7 @@ public class Subject {
 
     /**
      * Accessor method to set the id
+     *
      * @param id
      */
     public void setId(int id) {
@@ -46,6 +49,7 @@ public class Subject {
 
     /**
      * Accessor method to get the name
+     *
      * @return name
      */
     public String getName() {
@@ -54,6 +58,7 @@ public class Subject {
 
     /**
      * Accessor method to set the name
+     *
      * @param name
      */
     public void setName(String name) {
@@ -62,6 +67,7 @@ public class Subject {
 
     /**
      * Override toString to it returns the subject name.
+     *
      * @return the subject's name
      */
     @NonNull

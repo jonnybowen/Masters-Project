@@ -58,6 +58,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     /**
      * Returns size of the array list
+     *
      * @return notelist size
      */
     @Override
@@ -97,7 +98,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
 
     /**
-     *  interface to interpret click on item
+     * interface to interpret click on item
      */
     public interface OnNoteListener {
         void onNoteClick(int position);

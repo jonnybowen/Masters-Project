@@ -1,6 +1,7 @@
 package com.example.sdla_quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,7 @@ public class VideoMenuActivity extends AppCompatActivity {
 
     /**
      * onCreate - Initialise UI components and set button logic.
+     *
      * @param savedInstanceState
      */
     @Override

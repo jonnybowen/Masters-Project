@@ -76,7 +76,7 @@ public class NoteAddNoteActivity extends AppCompatActivity {
                 newTitle.setText("");
                 newContent.setText("");
 
-               finish();
+                finish();
             }
         });
     }
