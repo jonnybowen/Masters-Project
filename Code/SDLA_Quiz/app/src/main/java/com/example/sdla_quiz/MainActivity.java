@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 /**
  * The 'home' screen of the app. Acts as a launcher to access features of the app.
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton settingsButton;
 
     /**
-     * onCreate - Initialises UI and applies logic to buttons.
+     * onCreate - If this is the first time the app is run, launch the readiness survey.
+     * Initialises Menu UI and applies logic to buttons.
      *
      * @param savedInstanceState
      */
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Check if this is first time the app has been launched. If so, launch readiness questionnaire
+        checkFirstTime();
 
         //Initialise Buttons
         quizButton = (ImageButton) findViewById(R.id.imgbtn_menu_quiz);
@@ -86,8 +91,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
-
+    /**
+     * A method to check if this is the first launch of the app.
+     * Code snippet taken from https://androidwithdivya.wordpress.com/2017/02/14/how-to-launch-an-activity-only-once-for-the-first-time/
+     */
+    public void checkFirstTime() {
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+        if (isFirstRun) {
+            //show sign up activity
+            startActivity(new Intent(MainActivity.this, QuestionnaireFirstTime.class));
+        }
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putBoolean("isFirstRun", false).commit();
+    }
 }

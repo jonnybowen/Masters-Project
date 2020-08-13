@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoteMenuActivity"
-    android:background="@drawable/background_yellow">
+    android:background="@drawable/background_yellow"
+    tools:context=".NoteMenuActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/browseNotes_appBarLayout"
@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/imgbtn_notes_browse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_margin="32dp"
+        android:layout_marginTop="32dp"
         android:background="@color/darkGrey"
         android:drawableEnd="@drawable/flashmenu_add"
         android:fontFamily="@font/cairo"
