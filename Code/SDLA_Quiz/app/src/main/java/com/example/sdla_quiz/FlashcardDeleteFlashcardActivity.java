@@ -31,7 +31,7 @@ public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
      * Initialise UI (using custom adapter) and database. Assigns an itemtouchhelper to the
      * recyclerview.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class FlashcardDeleteFlashcardActivity extends AppCompatActivity {
     /**
      * Deletes selected flashcard from the database then informs user
      *
-     * @param id
+     * @param id the id of the database entry
      */
     private void removeItem(int id) {
         mDatabase.delete(DbContract.FlashcardsTable.TABLE_NAME,

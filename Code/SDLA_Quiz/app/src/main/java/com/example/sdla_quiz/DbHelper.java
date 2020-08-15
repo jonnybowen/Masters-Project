@@ -30,7 +30,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Constructor
      *
-     * @param context
+     * @param context The current context
      */
     public DbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,8 +39,8 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Gets an instance of the database-helper or creates one if null.
      *
-     * @param context
-     * @return instance
+     * @param context The current context
+     * @return instance An instance of the database
      */
     public static synchronized DbHelper getInstance(Context context) {
         if (instance == null) {
@@ -52,7 +52,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * On-create method. Create SQL tables and populate them with some dummy data.
      *
-     * @param db - a database
+     * @param db The SQLite database
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -126,9 +126,9 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * on-Upgrade method. Drops all tables and runs on-Create again if database version is changed.
      *
-     * @param db
-     * @param oldVersion
-     * @param newVersion
+     * @param db the database object to be upgraded
+     * @param oldVersion the old version number
+     * @param newVersion the new version number
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -144,7 +144,7 @@ public class DbHelper extends SQLiteOpenHelper {
      * on-Configure called when the database connection is being configured,
      * to enable foreign key support
      *
-     * @param db
+     * @param db the database to be configured
      */
     @Override
     public void onConfigure(SQLiteDatabase db) {
@@ -165,7 +165,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Inserts a subject to the database.
      *
-     * @param subject
+     * @param subject the subject object to insert
      */
     public void insertSubject(Subject subject) {
         ContentValues cv = new ContentValues();
@@ -176,7 +176,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Deletes a subject from the database
      *
-     * @param subjectName
+     * @param subjectName the name of the subject
      */
     public void deleteSubject(String subjectName) {
         db.delete(SubjectsTable.TABLE_NAME, SubjectsTable.COLUMN_SUBJECT_NAME + "=?", new String[]{subjectName});
@@ -185,7 +185,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Deletes a note from the database
      *
-     * @param note
+     * @param note the note to be deleted
      */
     public void deleteNote(Note note) {
         db = getWritableDatabase();
@@ -196,7 +196,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Returns a list of all available subjects from database.
      *
-     * @return subjectList
+     * @return subjectList the list of subjects
      */
     public List<Subject> getAllSubjects() {
         List<Subject> subjectList = new ArrayList<>();
@@ -238,7 +238,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Inserts a question object to the database.
      *
-     * @param question
+     * @param question Question object to be inserted
      */
     public void insertQuestion(Question question) {
         ContentValues cv = new ContentValues();
@@ -257,9 +257,9 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Returns an ArrayList of questions based on subject and difficulty
      *
-     * @param subjectId
-     * @param difficulty
-     * @return questionList
+     * @param subjectId the subject's id
+     * @param difficulty the difficulty of the question
+     * @return questionList the resultant list of questions
      */
     public ArrayList<Question> getQuestions(int subjectId, String difficulty) {
         ArrayList<Question> questionList = new ArrayList<>();
@@ -294,7 +294,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Inserts a flashcard object to the database.
      *
-     * @param flashcard
+     * @param flashcard the flashcard object to be inserted
      */
     public void insertFlashcard(Flashcard flashcard) {
         ContentValues cv = new ContentValues();
@@ -310,8 +310,8 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Returns a cursor in the flashcard table with data matching given subject.
      *
-     * @param subjectId
-     * @return cursor
+     * @param subjectId the subject's id
+     * @return cursor a database cursor holding the matching data
      */
     public Cursor getFlashcardsCursor(int subjectId) {
         db = getReadableDatabase();
@@ -332,8 +332,8 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Returns a list of flashcards that match the given subject.
      *
-     * @param subjectId
-     * @return flashcardList
+     * @param subjectId the subject's id
+     * @return flashcardList the resultant list of flashcards
      */
     public List<Flashcard> getFlashcards(int subjectId) {
         List<Flashcard> flashcardList = new ArrayList<>();
@@ -387,7 +387,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Method to insert a video object to the database.
      *
-     * @param video
+     * @param video the video object to inser
      */
     public void insertVideo(Video video) {
         ContentValues cv = new ContentValues();
@@ -421,8 +421,8 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Returns a cursor in the flashcard table with data matching given subject.
      *
-     * @param subjectId
-     * @return cursor
+     * @param subjectId the subject's id
+     * @return cursor the database cursor holding the required data
      */
     public Cursor getVideosCursor(int subjectId) {
         db = getReadableDatabase();
@@ -444,7 +444,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Inserts a note object to the database.
      *
-     * @param note
+     * @param note the note object to be inserted
      */
     public void insertNote(Note note) {
         ContentValues cv = new ContentValues();
@@ -471,8 +471,8 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Returns a cursor in the Notes table with data matching the given subject.
      *
-     * @param subjectId
-     * @return cursor
+     * @param subjectId the subject's id
+     * @return cursor a database cursor holding the matching data
      */
     public Cursor getNotesCursor(int subjectId) {
         db = getReadableDatabase();
@@ -493,8 +493,8 @@ public class DbHelper extends SQLiteOpenHelper {
     /**
      * Returns a list of flashcards that match the given subject.
      *
-     * @param subjectId
-     * @return flashcardList
+     * @param subjectId the subject's id
+     * @return flashcardList the resultant list of flashcards
      */
     public ArrayList<Note> getNotesList(int subjectId) {
         ArrayList<Note> noteList = new ArrayList<>();

@@ -23,8 +23,8 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
     /**
      * Constructor for the flashcard adapter.
      *
-     * @param context
-     * @param cursor
+     * @param context the context in which to use the adapter
+     * @param cursor a database cursor holding the data to be adapted
      */
     public FlashcardAdapter(Context context, Cursor cursor) {
         mContext = context;
@@ -42,7 +42,7 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
         /**
          * View holder constructor that accepts a view and assigns textviews to the layout.
          *
-         * @param itemView
+         * @param itemView the holder for each item - a row in the recyclerview
          */
         public FlashcardViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,9 +55,9 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
     /**
      * Assigns custom layout to the view, and returns a new Viewholder
      *
-     * @param parent
+     * @param parent the layout's parent view group
      * @param viewType
-     * @return FlashcardViewHolder
+     * @return FlashcardViewHolder a custom viewholder optimised for flashcards
      */
     @NonNull
     @Override
@@ -70,8 +70,8 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
     /**
      * Recycles view by assigning new data to it
      *
-     * @param holder
-     * @param position
+     * @param holder a row in the recycler view
+     * @param position the position in the recyclerview
      */
     @Override
     public void onBindViewHolder(@NonNull FlashcardViewHolder holder, int position) {

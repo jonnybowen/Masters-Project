@@ -40,7 +40,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * onCreate - Initialise ui, determine whether or not to enter edit mode.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Determine whether note is new and should enter edit mode, or old and should enter view mode.
      *
-     * @return
+     * @return whether or not note is new (true or false)
      */
     private boolean getIncomingIntent() {
         if (getIntent().hasExtra("selected_note")) {
@@ -245,7 +245,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
      * title - activate edit mode and set text cursor to end of current title.
      * back arrow - finish activity.
      *
-     * @param v
+     * @param v the view being clicked
      */
     @Override
     public void onClick(View v) {
@@ -287,7 +287,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Saves screen state when orientation is rotated.
      *
-     * @param outState
+     * @param outState the saved instance
      */
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -298,7 +298,7 @@ public class NoteViewNoteActivity extends AppCompatActivity implements View.OnTo
     /**
      * Restores screen state after orientation change.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState the save instance to restore
      */
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {

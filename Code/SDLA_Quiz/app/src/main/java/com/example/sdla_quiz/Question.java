@@ -36,13 +36,13 @@ public class Question implements Parcelable {
     /**
      * Constructor for the question class.
      *
-     * @param question
-     * @param option1
-     * @param option2
-     * @param option3
-     * @param answerNo
-     * @param difficulty
-     * @param subjectID
+     * @param question the question
+     * @param option1 answer option 1
+     * @param option2 answer option 2
+     * @param option3 answer option 3
+     * @param answerNo a number representing the correct answer option
+     * @param difficulty the question's difficulty
+     * @param subjectID the question's subject id
      */
     public Question(String question, String option1, String option2,
                     String option3, int answerNo, String difficulty, int subjectID) {
@@ -71,7 +71,7 @@ public class Question implements Parcelable {
     /**
      * Creates a parcel from a question.
      *
-     * @param dest
+     * @param dest the parcel to write to
      * @param flags
      */
     @Override
@@ -110,7 +110,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to get the question
      *
-     * @return
+     * @return the question
      */
     public String getQuestion() {
         return question;
@@ -119,7 +119,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to set the question
      *
-     * @param question
+     * @param question the question
      */
     public void setQuestion(String question) {
         this.question = question;
@@ -137,7 +137,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to set option 1
      *
-     * @param option1
+     * @param option1 answer option 1
      */
     public void setOption1(String option1) {
         this.option1 = option1;
@@ -146,7 +146,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to get option 2
      *
-     * @return option2
+     * @return option2 answer option 2
      */
     public String getOption2() {
         return option2;
@@ -155,7 +155,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to set option 2
      *
-     * @param option2
+     * @param option2 answer option 2
      */
     public void setOption2(String option2) {
         this.option2 = option2;
@@ -164,7 +164,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to get option 3
      *
-     * @return option3
+     * @return option3 answer option 3
      */
     public String getOption3() {
         return option3;
@@ -173,7 +173,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to set option 3
      *
-     * @param option3
+     * @param option3 answer option 3
      */
     public void setOption3(String option3) {
         this.option3 = option3;
@@ -182,7 +182,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to get the answer number
      *
-     * @return answerNo
+     * @return answerNo the number of the correct answer
      */
     public int getAnswerNo() {
         return answerNo;
@@ -191,7 +191,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to set the answer number
      *
-     * @param answerNo
+     * @param answerNo the number of the correct answer
      */
     public void setAnswerNo(int answerNo) {
         this.answerNo = answerNo;
@@ -200,7 +200,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to get the difficulty
      *
-     * @return difficulty
+     * @return difficulty the difficulty of the question
      */
     public String getDifficulty() {
         return difficulty;
@@ -209,7 +209,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to set the difficulty
      *
-     * @param difficulty
+     * @param difficulty the difficulty of the question
      */
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
@@ -218,7 +218,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to get the subject id
      *
-     * @return subjectId
+     * @return subjectId the subject id of the question
      */
     public int getSubjectID() {
         return subjectID;
@@ -227,7 +227,7 @@ public class Question implements Parcelable {
     /**
      * Accessor method to set the subject id
      *
-     * @param subjectID
+     * @param subjectID the subject id of the quetion
      */
     public void setSubjectID(int subjectID) {
         this.subjectID = subjectID;

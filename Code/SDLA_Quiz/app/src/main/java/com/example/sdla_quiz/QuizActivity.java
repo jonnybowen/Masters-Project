@@ -75,7 +75,7 @@ public class QuizActivity extends AppCompatActivity {
     /**
      * On-Create - Initialise UI, Buttons, and setup quiz based on previous parameters and start it.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -327,7 +327,7 @@ public class QuizActivity extends AppCompatActivity {
     /**
      * Save screen state when changing orientation of screen.
      *
-     * @param outState
+     * @param outState the saved instance state
      */
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {

@@ -40,7 +40,7 @@ public class FlashcardViewFlashcardActivity extends AppCompatActivity {
      * Initialises ui components, generates a list of flashcards from chosen subject
      * then loads first flashcard.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

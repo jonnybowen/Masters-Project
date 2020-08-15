@@ -45,7 +45,7 @@ public class QuizMenuActivity extends AppCompatActivity {
     /**
      * onCreate - Initialise UI and apply logic to buttons.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +132,7 @@ public class QuizMenuActivity extends AppCompatActivity {
     /**
      * Method to update the high score with a new one.
      *
-     * @param highScoreNew
+     * @param highScoreNew the new highscore to be stored
      */
     private void updateHighScore(int highScoreNew) {
         highScore = highScoreNew;
@@ -147,9 +147,9 @@ public class QuizMenuActivity extends AppCompatActivity {
     /**
      * Checks high score upon quiz completion and updates if necessary
      *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode the starting trigger
+     * @param resultCode the ending trigger
+     * @param data data to be updated
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

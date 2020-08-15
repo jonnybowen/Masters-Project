@@ -38,7 +38,7 @@ public class NoteAddNoteActivity extends AppCompatActivity {
     /**
      * onCreate - Loads UI and applies relevant logic to buttons.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class NoteAddNoteActivity extends AppCompatActivity {
     /**
      * Accessor method to get the title holder-string
      *
-     * @return titleHolder
+     * @return titleHolder temporary holder for the title
      */
     public String getTitleHolder() {
         return titleHolder;
@@ -93,7 +93,7 @@ public class NoteAddNoteActivity extends AppCompatActivity {
     /**
      * Accessor method to set the title holder-string
      *
-     * @param titleHolder
+     * @param titleHolder temporary holder for the title
      */
     public void setTitleHolder(String titleHolder) {
         this.titleHolder = titleHolder;
@@ -102,7 +102,7 @@ public class NoteAddNoteActivity extends AppCompatActivity {
     /**
      * Accessor method to get the content holder-string
      *
-     * @return
+     * @return contentHolder temporary holder for the content
      */
     public String getContentHolder() {
         return contentHolder;
@@ -111,7 +111,7 @@ public class NoteAddNoteActivity extends AppCompatActivity {
     /**
      * Accessor method to set the content holder-string
      *
-     * @param contentHolder
+     * @param contentHolder temporary holder for the content
      */
     public void setContentHolder(String contentHolder) {
         this.contentHolder = contentHolder;
@@ -120,7 +120,7 @@ public class NoteAddNoteActivity extends AppCompatActivity {
     /**
      * Accessor method to get the subject id holder-int
      *
-     * @return
+     * @return subjectIdHolder temporary holder for the subject id
      */
     public int getSubjectIdHolder() {
         return subjectIdHolder;
@@ -129,7 +129,7 @@ public class NoteAddNoteActivity extends AppCompatActivity {
     /**
      * Accessor method to set the subject id holder-int
      *
-     * @param subjectIdHolder
+     * @param subjectIdHolder  temporary holder for the subject id
      */
     public void setSubjectIdHolder(int subjectIdHolder) {
         this.subjectIdHolder = subjectIdHolder;

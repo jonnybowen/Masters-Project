@@ -19,9 +19,9 @@ public class Flashcard {
     /**
      * Constructor
      *
-     * @param term
-     * @param definition
-     * @param subjectId
+     * @param term the flashcard's term
+     * @param definition the flashcard's definition
+     * @param subjectId the flashcard's subject id
      */
     public Flashcard(String term, String definition, int subjectId) {
         this.term = term;
@@ -32,7 +32,7 @@ public class Flashcard {
     /**
      * Accessor method to get the term
      *
-     * @return term
+     * @return term the flashcard's term
      */
     public String getTerm() {
         return term;
@@ -41,7 +41,7 @@ public class Flashcard {
     /**
      * Accessor method to set the term
      *
-     * @param term
+     * @param term the flashcard's term
      */
     public void setTerm(String term) {
         this.term = term;
@@ -50,7 +50,7 @@ public class Flashcard {
     /**
      * Accessor method to get the definition
      *
-     * @return definition
+     * @return definition the flashcard's definition
      */
     public String getDefinition() {
         return definition;
@@ -59,7 +59,7 @@ public class Flashcard {
     /**
      * Accessor method to set the definition
      *
-     * @param definition
+     * @param definition the flashcard's definition
      */
     public void setDefinition(String definition) {
         this.definition = definition;
@@ -68,7 +68,7 @@ public class Flashcard {
     /**
      * Accessor method to get the subject id
      *
-     * @return the subject id
+     * @return the flashcard's subject id
      */
     public int getSubjectId() {
         return subjectId;
@@ -77,7 +77,7 @@ public class Flashcard {
     /**
      * Accessor method to set the subject id
      *
-     * @param subjectId
+     * @param subjectId the the flashcard's subject id
      */
     public void setSubjectId(int subjectId) {
         this.subjectId = subjectId;

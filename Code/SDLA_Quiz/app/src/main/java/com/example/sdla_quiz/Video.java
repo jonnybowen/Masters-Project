@@ -17,9 +17,9 @@ public class Video {
     /**
      * Constructor
      *
-     * @param title
-     * @param url
-     * @param subjectId
+     * @param title the title of video
+     * @param url the video's url
+     * @param subjectId the video's subject id
      */
     public Video(String title, String url, int subjectId) {
         this.title = title;
@@ -46,7 +46,7 @@ public class Video {
     /**
      * Accessor method to set the title
      *
-     * @param title
+     * @param title the title of the video
      */
     public void setTitle(String title) {
         this.title = title;
@@ -64,7 +64,7 @@ public class Video {
     /**
      * Accessor method to set the URL
      *
-     * @return url
+     * @param url the video's url
      */
     public void setUrl(String url) {
         this.url = url;
@@ -73,7 +73,7 @@ public class Video {
     /**
      * Accessor method to get the subject id
      *
-     * @return
+     * @return the video's subject id
      */
     public int getSubjectId() {
         return subjectId;
@@ -82,7 +82,7 @@ public class Video {
     /**
      * Accessor method to set the subject id
      *
-     * @param subjectId
+     * @param subjectId the video's subject id
      */
     public void setSubjectId(int subjectId) {
         this.subjectId = subjectId;

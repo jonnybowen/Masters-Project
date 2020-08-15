@@ -23,7 +23,7 @@ public class VideoBrowseVideosActivity extends AppCompatActivity {
     /**
      * onCreate - Initialises ui components, then initialises the recycler view based on subject.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

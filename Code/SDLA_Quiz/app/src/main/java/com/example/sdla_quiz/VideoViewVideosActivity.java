@@ -27,7 +27,7 @@ public class VideoViewVideosActivity extends YouTubeBaseActivity {
     /**
      * onCreate - Initialise UI, set button logic and initialise video from selected URL.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

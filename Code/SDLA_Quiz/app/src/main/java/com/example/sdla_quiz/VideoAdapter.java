@@ -30,8 +30,8 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     /**
      * Constructor
      *
-     * @param context
-     * @param cursor
+     * @param context the context in which to use the adapter
+     * @param cursor a database cursor holding the data to be adapted
      */
     public VideoAdapter(Context context, Cursor cursor) {
         mContext = context;
@@ -59,7 +59,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     /**
      * Assigns custom layout to the view, and returns a new Viewholder
      *
-     * @param parent
+     * @param parent the layout's parent view group
      * @param viewType
      * @return FlashcardViewHolder
      */

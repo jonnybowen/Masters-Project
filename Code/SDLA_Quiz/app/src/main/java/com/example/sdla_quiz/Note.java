@@ -18,10 +18,10 @@ public class Note implements Parcelable {
     /**
      * Constructor
      *
-     * @param title
-     * @param content
-     * @param timestamp
-     * @param subjectID
+     * @param title the note's title
+     * @param content the note's content
+     * @param timestamp the note's timestamp
+     * @param subjectID the note's subject ID
      */
     public Note(String title, String content, String timestamp, int subjectID) {
         this.title = title;
@@ -137,7 +137,7 @@ public class Note implements Parcelable {
     /**
      * Override of toString method, returns all of the note's fields as a string.
      *
-     * @return the note's contents.
+     * @return the note's contents in string format
      */
     @Override
     public String toString() {

@@ -17,7 +17,7 @@ public class VerticalSpacingItemDecorator extends RecyclerView.ItemDecoration {
     /**
      * Constructor
      *
-     * @param verticalSpaceHeight
+     * @param verticalSpaceHeight the measurement of height between entries
      */
     public VerticalSpacingItemDecorator(int verticalSpaceHeight) {
         this.verticalSpaceHeight = verticalSpaceHeight;
@@ -27,10 +27,10 @@ public class VerticalSpacingItemDecorator extends RecyclerView.ItemDecoration {
      * Override, required implementation. Determines space for separation based off of
      * bottom side view.
      *
-     * @param outRect
+     * @param outRect a rectanlge object
      * @param view
-     * @param parent
-     * @param state
+     * @param parent the recyclerview
+     * @param state state from the recyclerview
      */
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {

@@ -32,7 +32,7 @@ public class VideoMenuActivity extends AppCompatActivity {
     /**
      * onCreate - Initialise UI components and set button logic.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

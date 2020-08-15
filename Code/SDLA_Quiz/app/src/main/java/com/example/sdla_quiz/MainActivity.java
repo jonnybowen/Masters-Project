@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
      * onCreate - If this is the first time the app is run, launch the readiness survey.
      * Initialises Menu UI and applies logic to buttons.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

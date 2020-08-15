@@ -42,7 +42,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     /**
      * OnCreate - Initialise UI and apply logic to buttons.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +124,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     /**
      * Accessor method to set the new question
      *
-     * @param newQuestion
+     * @param newQuestion the newly created question
      */
     public void setNewQuestion(String newQuestion) {
         this.newQuestion = newQuestion;
@@ -134,7 +134,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     /**
      * Accessor method to set the new option 1
      *
-     * @param newOption1
+     * @param newOption1 option 1 of the new question
      */
     public void setNewOption1(String newOption1) {
         this.newOption1 = newOption1;
@@ -144,7 +144,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     /**
      * Accessor method to set the new option 2
      *
-     * @param newOption2
+     * @param newOption2 option 2 of the new question
      */
     public void setNewOption2(String newOption2) {
         this.newOption2 = newOption2;
@@ -153,7 +153,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     /**
      * Accessor method to set the new option 3
      *
-     * @param newOption3
+     * @param newOption3 option 3 of the new question
      */
     public void setNewOption3(String newOption3) {
         this.newOption3 = newOption3;
@@ -162,7 +162,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     /**
      * Accessor method to set the answer id
      *
-     * @param newAnswerId
+     * @param newAnswerId the answer number of the new question
      */
     public void setNewAnswerId(int newAnswerId) {
         this.newAnswerId = newAnswerId;
@@ -171,7 +171,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     /**
      * Accessor method to set the new difficulty
      *
-     * @param newDifficulty
+     * @param newDifficulty difficulty of the new question
      */
     public void setNewDifficulty(String newDifficulty) {
         this.newDifficulty = newDifficulty;
@@ -180,7 +180,7 @@ public class QuizCreateQuestionActivity extends AppCompatActivity {
     /**
      * Accessor method to set the new subject
      *
-     * @param newSubject
+     * @param newSubject the subject of the new question
      */
     public void setNewSubject(int newSubject) {
         this.newSubject = newSubject;

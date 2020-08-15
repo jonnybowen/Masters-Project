@@ -2,6 +2,7 @@ package com.example.sdla_quiz;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +18,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This questionnaire launches the first time the app is launched. It assesses a user's readiness to
+ * learn based on a fixed set of questions, then shows the user their score at the end with a message.
+ */
 public class QuestionnaireFirstTime extends AppCompatActivity {
 
     //Declare TextViews
@@ -36,6 +41,12 @@ public class QuestionnaireFirstTime extends AppCompatActivity {
     private int importanceScore;
     private int skillScore;
 
+    /**
+     * Oncreate - Initalise UI and button logic. Generate dialog box to explain point of survey.
+     * generate question list, shuffle and show the first question.
+     *
+     * @param savedInstanceState a saved instance of an activity (if there is one)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +60,25 @@ public class QuestionnaireFirstTime extends AppCompatActivity {
         etSkill = findViewById(R.id.et_survey_input_skill);
         btnNext = findViewById(R.id.btn_survey_next);
 
+        Toolbar toolbar = findViewById(R.id.survey_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        setTitle("Learning Readiness Survey");
+
+        //Explain Survey with dialog box
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("This is the first time you have launched Studbud. Please complete this short survey to determine your learning readiness.");
+        builder1.setCancelable(true);
+        builder1.setNeutralButton(
+                "OK!",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder1.create();
+        alert.show();
+
         questionList = new ArrayList<>();
 
         //Init vars
@@ -56,11 +86,12 @@ public class QuestionnaireFirstTime extends AppCompatActivity {
         skillScore = 0;
         questionCounter = 0;
 
+        //Create question list
         initQuestions();
 
-        //On-Create logic. Retrieve the question list, shuffle it, and show a question.
+        //Shuffle question list, and show a question.
         questionCounterTotal = questionList.size(); //Establishes how many q's the quiz will be.
-        Collections.shuffle(questionList); // Randomises the order of the question-list
+        Collections.shuffle(getQuestionList()); // Randomises the order of the question-list
         showNextQuestion();
 
 
@@ -100,26 +131,6 @@ public class QuestionnaireFirstTime extends AppCompatActivity {
         return questionList;
     }
 
-    public void setQuestionList(ArrayList<String> questionList) {
-        this.questionList = questionList;
-    }
-
-    public int getQuestionCounter() {
-        return questionCounter;
-    }
-
-    public void setQuestionCounter(int questionCounter) {
-        this.questionCounter = questionCounter;
-    }
-
-    public int getQuestionCounterTotal() {
-        return questionCounterTotal;
-    }
-
-    public void setQuestionCounterTotal(int questionCounterTotal) {
-        this.questionCounterTotal = questionCounterTotal;
-    }
-
     public int getImportanceScore() {
         return importanceScore;
     }
@@ -136,6 +147,9 @@ public class QuestionnaireFirstTime extends AppCompatActivity {
         this.skillScore = skillScore;
     }
 
+    /**
+     * Initialise questions. Adds fixed list of learning-readiness questions to the question list.
+     */
     public void initQuestions() {
         questionList.add("Life skills: Organisation of time and resources in your life, co-operation in working with others, available support network");
         questionList.add("Independence: Autonomy, self-motivation, self-reliance, resourcefulness, initiative, and judgment");
@@ -172,32 +186,33 @@ public class QuestionnaireFirstTime extends AppCompatActivity {
     }
 
     /**
-     * A method to evaluate the score, generates a dialog based on the user passing or failing the survey
+     * A method to evaluate the score, generates a dialog box informing the user of passing or failing the survey
      *
      * @param context
      */
     public void evaluateScore(Context context) {
         //Declare vars
-        double totalSkillScore;
-        double totalImportanceScore;
+        int totalSkillScore;
+        int totalImportanceScore;
 
         //Init vars
         totalSkillScore = getSkillScore();
         totalImportanceScore = getImportanceScore();
+        int finalImpScore = (totalImportanceScore / questionList.size());
+        int finalSkillScore = (totalSkillScore / questionList.size());
         AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
 
         //Negative path, failed assessment
-        if ((totalImportanceScore / 12) > 3 || (totalSkillScore / 12) > 3) {
-            builder1.setMessage("For importance you scored: " + (getImportanceScore()/12) + ". For skill you scored: " + (getSkillScore()/12) + ". This assessment has determined you are not ready for self-directed learning. Please try again another time.");
+        if (finalImpScore > 3 || finalSkillScore > 3) {
+            builder1.setMessage("For importance you scored: " + (finalImpScore) + ". For skill you scored: " + (finalSkillScore) + ". This assessment has determined you are not ready for self-directed learning. Please try again another time.");
             builder1.setCancelable(true);
-
             builder1.setNeutralButton(
                     "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                             finish();
-                            System.exit(0);
+                            System.exit(1);
                         }
                     });
             AlertDialog alert = builder1.create();
@@ -206,8 +221,8 @@ public class QuestionnaireFirstTime extends AppCompatActivity {
 
 
         //Positive path, assessment passed.
-        if (totalImportanceScore / 12 < 3 && totalSkillScore / 12 < 3) {
-            builder1.setMessage("For importance you scored: " + (getImportanceScore()/12) + ". For skill you scored: " + (getSkillScore()/12) + ". This assessment has determined you are ready for self-directed learning. Press ok to proceed.");
+        if (finalImpScore < 3 && finalSkillScore < 3) {
+            builder1.setMessage("For importance you scored: " + (getImportanceScore() / 12) + ". For skill you scored: " + (getSkillScore() / 12) + ". This assessment has determined you are ready for self-directed learning. Press ok to proceed.");
             builder1.setNeutralButton(
                     "OK",
                     new DialogInterface.OnClickListener() {

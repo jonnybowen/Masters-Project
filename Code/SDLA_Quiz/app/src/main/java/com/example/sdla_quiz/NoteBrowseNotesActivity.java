@@ -38,7 +38,7 @@ public class NoteBrowseNotesActivity extends AppCompatActivity implements NoteAd
     /**
      * onCreate - Initialises ui components, then initialises the recycler view based on subject.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +141,7 @@ public class NoteBrowseNotesActivity extends AppCompatActivity implements NoteAd
     /**
      * Accessor method to get the subject id
      *
-     * @return
+     * @return the subject id
      */
     public int getSubjectId() {
         return subjectId;
@@ -150,7 +150,7 @@ public class NoteBrowseNotesActivity extends AppCompatActivity implements NoteAd
     /**
      * Accessor method to set the subject id
      *
-     * @param subjectId
+     * @param subjectId the subject id
      */
     public void setSubjectId(int subjectId) {
         this.subjectId = subjectId;

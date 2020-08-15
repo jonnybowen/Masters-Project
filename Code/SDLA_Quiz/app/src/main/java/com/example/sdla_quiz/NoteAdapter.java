@@ -22,8 +22,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     /**
      * Constructor for the adapter
      *
-     * @param noteList
-     * @param onNoteListener
+     * @param noteList the list of notes to adapt
+     * @param onNoteListener an onNoteListener to enable clicking on separate entries
      */
     public NoteAdapter(ArrayList<Note> noteList, OnNoteListener onNoteListener) {
         this.noteList = noteList;
@@ -33,7 +33,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     /**
      * Instantiates and returns a new viewholder object
      *
-     * @param parent
+     * @param parent the layout's parent view group
      * @param viewType
      * @return
      */
@@ -47,8 +47,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     /**
      * Sets attributes to the viewholder object.
      *
-     * @param holder
-     * @param position
+     * @param holder a row in the recycler view
+     * @param position the position in the recyclerview
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -78,8 +78,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         /**
          * Constructor for the view holder
          *
-         * @param itemView
-         * @param onNoteListener
+         * @param itemView the item view
+         * @param onNoteListener the click listener to attack to the itemview
          */
         public ViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);

@@ -23,7 +23,7 @@ public class Subject {
     /**
      * Constructor for subject class
      *
-     * @param name
+     * @param name the name of the subject
      */
     public Subject(String name) {
         this.name = name;
@@ -41,7 +41,7 @@ public class Subject {
     /**
      * Accessor method to set the id
      *
-     * @param id
+     * @param id the id of the subject
      */
     public void setId(int id) {
         this.id = id;
@@ -59,7 +59,7 @@ public class Subject {
     /**
      * Accessor method to set the name
      *
-     * @param name
+     * @param name the name of the subject
      */
     public void setName(String name) {
         this.name = name;

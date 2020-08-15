@@ -20,7 +20,7 @@ public class SubjectsMenuActivity extends AppCompatActivity {
     /**
      * OnCreate - Initialise UI and apply button logic.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState a saved instance of an activity (if there is one)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
