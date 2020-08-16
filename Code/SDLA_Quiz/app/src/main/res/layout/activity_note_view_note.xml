@@ -23,7 +23,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.example.sdla_quiz.LinedEditText
+    <com.example.SDLA.LinedEditText
         android:id="@+id/viewNote_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sdla_quiz">
+    package="com.example.SDLA">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,29 +11,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QuestionnaireFirstTime"></activity>
+        <activity android:name="com.example.SDLA.QuestionnaireFirstTime"></activity>
         <activity
-            android:name=".NoteAddNoteActivity"
+            android:name="com.example.SDLA.NoteAddNoteActivity"
             android:label="@string/title_activity_note_add_note"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NoteViewNoteActivity" />
-        <activity android:name=".NoteBrowseNotesActivity" />
-        <activity android:name=".NoteMenuActivity" />
-        <activity android:name=".VideoViewVideosActivity" />
-        <activity android:name=".VideoBrowseVideosActivity" />
-        <activity android:name=".VideoNewVideoActivity" />
-        <activity android:name=".VideoMenuActivity" />
-        <activity android:name=".FlashcardDeleteFlashcardActivity" />
-        <activity android:name=".FlashcardNewFlashcardActivity" />
-        <activity android:name=".FlashcardMenuActivity" />
-        <activity android:name=".FlashcardViewFlashcardActivity" />
-        <activity android:name=".SubjectsDeleteSubjectActivity" />
-        <activity android:name=".SubjectsNewSubjectActivity" />
-        <activity android:name=".SubjectsMenuActivity" />
-        <activity android:name=".QuizCreateQuestionActivity" />
-        <activity android:name=".QuizActivity" />
-        <activity android:name=".QuizMenuActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.SDLA.NoteViewNoteActivity" />
+        <activity android:name="com.example.SDLA.NoteBrowseNotesActivity" />
+        <activity android:name="com.example.SDLA.NoteMenuActivity" />
+        <activity android:name="com.example.SDLA.VideoViewVideosActivity" />
+        <activity android:name="com.example.SDLA.VideoBrowseVideosActivity" />
+        <activity android:name="com.example.SDLA.VideoNewVideoActivity" />
+        <activity android:name="com.example.SDLA.VideoMenuActivity" />
+        <activity android:name="com.example.SDLA.FlashcardDeleteFlashcardActivity" />
+        <activity android:name="com.example.SDLA.FlashcardNewFlashcardActivity" />
+        <activity android:name="com.example.SDLA.FlashcardMenuActivity" />
+        <activity android:name="com.example.SDLA.FlashcardViewFlashcardActivity" />
+        <activity android:name="com.example.SDLA.SubjectsDeleteSubjectActivity" />
+        <activity android:name="com.example.SDLA.SubjectsNewSubjectActivity" />
+        <activity android:name="com.example.SDLA.SubjectsMenuActivity" />
+        <activity android:name="com.example.SDLA.QuizCreateQuestionActivity" />
+        <activity android:name="com.example.SDLA.QuizActivity" />
+        <activity android:name="com.example.SDLA.QuizMenuActivity" />
+        <activity android:name="com.example.SDLA.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
